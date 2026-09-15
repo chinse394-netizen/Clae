@@ -29,7 +29,7 @@ local function downloadFile(path, func)
 			downloader.Text = 'Downloading '.. path
 		end
 		local suc, res = pcall(function()
-			return game:HttpGet('https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/'..readfile('levi_shakingrass/profiles/commit.txt')..'/'..select(1, path:gsub('levi_shakingrass/', '')), true)
+			return game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'..readfile('Clae/profiles/commit.txt')..'/'..select(1, path:gsub('Clae/', '')), true)
 		end)
 		if not suc or res == '404: Not Found' then
 			error(res)
@@ -57,7 +57,7 @@ local function wipeFolder(path)
 end
 
 
-for _, folder in {'catrewrite', 'levi_shakingrass/games', 'levi_shakingrass/profiles', 'levi_shakingrass/assets', 'levi_shakingrass/libraries', 'levi_shakingrass/guis', 'levi_shakingrass/texturepacks'} do
+for _, folder in {'catrewrite', 'Clae/games', 'Clae/profiles', 'Clae/assets', 'Clae/libraries', 'Clae/guis', 'Clae/texturepacks'} do
 	if not isfolder(folder) then
 		downloader.Text = 'Downloading '.. folder
 		makefolder(folder)
@@ -68,25 +68,25 @@ if not shared.VapeDeveloper then
 	local commit = license.Commit or nil
 	if not commit then
 		local ok, subbed = pcall(function()
-			return game:HttpGet('https://api.github.com/repos/5rmsn4tt2c-ux/levi_shakingrass/commits/main')
+			return game:HttpGet('https://api.github.com/repos/chinse394-netizen/Clae/commits/main')
 		end)
 		if ok and type(subbed) == 'string' then
 			commit = subbed:match('"sha"%s*:%s*"(%x+)"')
 		end
 		commit = commit and #commit == 40 and commit or 'main'
 	end
-	if commit == 'main' or (isfile('levi_shakingrass/profiles/commit.txt') and readfile('levi_shakingrass/profiles/commit.txt') or '') ~= commit then
-		if commit ~= 'main' and isfile('levi_shakingrass/profiles/commit.txt') then
-			shared.updated = readfile('levi_shakingrass/profiles/commit.txt')
+	if commit == 'main' or (isfile('Clae/profiles/commit.txt') and readfile('Clae/profiles/commit.txt') or '') ~= commit then
+		if commit ~= 'main' and isfile('Clae/profiles/commit.txt') then
+			shared.updated = readfile('Clae/profiles/commit.txt')
 		end
 		wipeFolder('catrewrite')
-		wipeFolder('levi_shakingrass/games')
-		wipeFolder('levi_shakingrass/guis')
-		wipeFolder('levi_shakingrass/libraries')
-		wipeFolder('levi_shakingrass/texturepacks')
+		wipeFolder('Clae/games')
+		wipeFolder('Clae/guis')
+		wipeFolder('Clae/libraries')
+		wipeFolder('Clae/texturepacks')
 	end
-	writefile('levi_shakingrass/profiles/commit.txt', commit)
+	writefile('Clae/profiles/commit.txt', commit)
 end
 
 downloader.Text = ''
-return loadstring(downloadFile('levi_shakingrass/main.lua'), 'main')(license)
+return loadstring(downloadFile('Clae/main.lua'), 'main')(license)
