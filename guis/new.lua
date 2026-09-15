@@ -1,12 +1,9 @@
-local license = ... or {}
--- One module-level variable covering all executor identity-function names
-local _setIdentity = setthreadidentity or setidentity or (syn and syn.set_thread_identity) or (getgenv and getgenv().setthreadidentity)
 local mainapi = {
 	Categories = {},
 	GUIColor = {
-		Hue = 0.62,
-		Sat = 0.88,
-		Value = 0.95
+		Hue = 0.46,
+		Sat = 0.96,
+		Value = 0.52
 	},
 	HeldKeybinds = {},
 	Keybind = {'RightShift'},
@@ -20,10 +17,9 @@ local mainapi = {
 	RainbowUpdateSpeed = {Value = 60},
 	RainbowTable = {},
 	Scale = {Value = 1},
-	ThreadFix = _setIdentity and true or false,
+	ThreadFix = setthreadidentity and true or false,
 	ToggleNotifications = {},
 	Version = '4.18',
-	ToggleMode = {Value = 'Toggle'},
 	Windows = {}
 }
 
@@ -55,78 +51,77 @@ local tween = {
 	tweenstwo = {}
 }
 local uipallet = {
-	Main = Color3.fromRGB(14, 13, 20),
-	Text = Color3.fromRGB(215, 220, 240),
-	Font = Font.fromEnum(Enum.Font.SciFi),
-	FontSemiBold = Font.fromEnum(Enum.Font.SciFi),
+	Main = Color3.fromRGB(26, 25, 26),
+	Text = Color3.fromRGB(200, 200, 200),
+	Font = Font.fromEnum(Enum.Font.Arial),
+	FontSemiBold = Font.fromEnum(Enum.Font.Arial, Enum.FontWeight.SemiBold),
 	Tween = TweenInfo.new(0.16, Enum.EasingStyle.Linear)
 }
 
 local getcustomassets = {
-	['levi_shakingrass/assets/new/add.png'] = 'rbxassetid://14368300605',
-	['levi_shakingrass/assets/new/alert.png'] = 'rbxassetid://14368301329',
-	['levi_shakingrass/assets/new/allowedicon.png'] = 'rbxassetid://14368302000',
-	['levi_shakingrass/assets/new/allowedtab.png'] = 'rbxassetid://14368302875',
-	['levi_shakingrass/assets/new/arrowmodule.png'] = 'rbxassetid://14473354880',
-	['levi_shakingrass/assets/new/back.png'] = 'rbxassetid://14368303894',
-	['levi_shakingrass/assets/new/bind.png'] = 'rbxassetid://14368304734',
-	['levi_shakingrass/assets/new/bindbkg.png'] = 'rbxassetid://14368305655',
-	['levi_shakingrass/assets/new/blatanticon.png'] = 'rbxassetid://14368306745',
-	['levi_shakingrass/assets/new/blockedicon.png'] = 'rbxassetid://14385669108',
-	['levi_shakingrass/assets/new/blockedtab.png'] = 'rbxassetid://14385672881',
-	['levi_shakingrass/assets/new/blur.png'] = 'rbxassetid://14898786664',
-	['levi_shakingrass/assets/new/blurnotif.png'] = 'rbxassetid://16738720137',
-	['levi_shakingrass/assets/new/close.png'] = 'rbxassetid://14368309446',
-	['levi_shakingrass/assets/new/closemini.png'] = 'rbxassetid://14368310467',
-	['levi_shakingrass/assets/new/colorpreview.png'] = 'rbxassetid://14368311578',
-	['levi_shakingrass/assets/new/combaticon.png'] = 'rbxassetid://14368312652',
-	['levi_shakingrass/assets/new/customsettings.png'] = 'rbxassetid://14403726449',
-	['levi_shakingrass/assets/new/discord.png'] = '',
-	['levi_shakingrass/assets/new/dots.png'] = 'rbxassetid://14368314459',
-	['levi_shakingrass/assets/new/edit.png'] = 'rbxassetid://14368315443',
-	['levi_shakingrass/assets/new/expandicon.png'] = 'rbxassetid://14368353032',
-	['levi_shakingrass/assets/new/expandright.png'] = 'rbxassetid://14368316544',
-	['levi_shakingrass/assets/new/expandup.png'] = 'rbxassetid://14368317595',
-	['levi_shakingrass/assets/new/friendstab.png'] = 'rbxassetid://14397462778',
-	['levi_shakingrass/assets/new/guisettings.png'] = 'rbxassetid://14368318994',
-	['levi_shakingrass/assets/new/guislider.png'] = 'rbxassetid://14368320020',
-	['levi_shakingrass/assets/new/guisliderrain.png'] = 'rbxassetid://14368321228',
-	['levi_shakingrass/assets/new/guiv4.png'] = 'rbxassetid://14368322199',
-	['levi_shakingrass/assets/new/levibutton.png'] = '',
-	['levi_shakingrass/assets/new/guivape.png'] = 'rbxassetid://14657521312',
-	['levi_shakingrass/assets/new/info.png'] = 'rbxassetid://14368324807',
-	['levi_shakingrass/assets/new/inventoryicon.png'] = 'rbxassetid://14928011633',
-	['levi_shakingrass/assets/new/legit.png'] = 'rbxassetid://14425650534',
-	['levi_shakingrass/assets/new/legittab.png'] = 'rbxassetid://14426740825',
-	['levi_shakingrass/assets/new/miniicon.png'] = 'rbxassetid://14368326029',
-	['levi_shakingrass/assets/new/notification.png'] = 'rbxassetid://16738721069',
-	['levi_shakingrass/assets/new/overlaysicon.png'] = 'rbxassetid://14368339581',
-	['levi_shakingrass/assets/new/overlaystab.png'] = 'rbxassetid://14397380433',
-	['levi_shakingrass/assets/new/pin.png'] = 'rbxassetid://14368342301',
-	['levi_shakingrass/assets/new/profilesicon.png'] = 'rbxassetid://14397465323',
-	['levi_shakingrass/assets/new/radaricon.png'] = 'rbxassetid://14368343291',
-	['levi_shakingrass/assets/new/rainbow_1.png'] = 'rbxassetid://14368344374',
-	['levi_shakingrass/assets/new/rainbow_2.png'] = 'rbxassetid://14368345149',
-	['levi_shakingrass/assets/new/rainbow_3.png'] = 'rbxassetid://14368345840',
-	['levi_shakingrass/assets/new/rainbow_4.png'] = 'rbxassetid://14368346696',
-	['levi_shakingrass/assets/new/range.png'] = 'rbxassetid://14368347435',
-	['levi_shakingrass/assets/new/rangearrow.png'] = 'rbxassetid://14368348640',
-	['levi_shakingrass/assets/new/rendericon.png'] = 'rbxassetid://14368350193',
-	['levi_shakingrass/assets/new/rendertab.png'] = 'rbxassetid://14397373458',
-	['levi_shakingrass/assets/new/search.png'] = 'rbxassetid://14425646684',
-	['levi_shakingrass/assets/new/targetinfoicon.png'] = 'rbxassetid://14368354234',
-	['levi_shakingrass/assets/new/targetnpc1.png'] = 'rbxassetid://14497400332',
-	['levi_shakingrass/assets/new/targetnpc2.png'] = 'rbxassetid://14497402744',
-	['levi_shakingrass/assets/new/targetplayers1.png'] = 'rbxassetid://14497396015',
-	['levi_shakingrass/assets/new/targetplayers2.png'] = 'rbxassetid://14497397862',
-	['levi_shakingrass/assets/new/targetstab.png'] = 'rbxassetid://14497393895',
-	['levi_shakingrass/assets/new/textguiicon.png'] = 'rbxassetid://14368355456',
-	['levi_shakingrass/assets/new/textv4.png'] = 'rbxassetid://14368357095',
-	['levi_shakingrass/assets/new/textvape.png'] = 'rbxassetid://14368358200',
-	['levi_shakingrass/assets/new/utilityicon.png'] = 'rbxassetid://14368359107',
-	['levi_shakingrass/assets/new/vape.png'] = 'rbxassetid://14373395239',
-	['levi_shakingrass/assets/new/warning.png'] = 'rbxassetid://14368361552',
-	['levi_shakingrass/assets/new/worldicon.png'] = 'rbxassetid://14368362492'
+	['Clae/assets/new/add.png'] = 'rbxassetid://14368300605',
+	['Clae/assets/new/alert.png'] = 'rbxassetid://14368301329',
+	['Clae/assets/new/allowedicon.png'] = 'rbxassetid://14368302000',
+	['Clae/assets/new/allowedtab.png'] = 'rbxassetid://14368302875',
+	['Clae/assets/new/arrowmodule.png'] = 'rbxassetid://14473354880',
+	['Clae/assets/new/back.png'] = 'rbxassetid://14368303894',
+	['Clae/assets/new/bind.png'] = 'rbxassetid://14368304734',
+	['Clae/assets/new/bindbkg.png'] = 'rbxassetid://14368305655',
+	['Clae/assets/new/blatanticon.png'] = 'rbxassetid://14368306745',
+	['Clae/assets/new/blockedicon.png'] = 'rbxassetid://14385669108',
+	['Clae/assets/new/blockedtab.png'] = 'rbxassetid://14385672881',
+	['Clae/assets/new/blur.png'] = 'rbxassetid://14898786664',
+	['Clae/assets/new/blurnotif.png'] = 'rbxassetid://16738720137',
+	['Clae/assets/new/close.png'] = 'rbxassetid://14368309446',
+	['Clae/assets/new/closemini.png'] = 'rbxassetid://14368310467',
+	['Clae/assets/new/colorpreview.png'] = 'rbxassetid://14368311578',
+	['Clae/assets/new/combaticon.png'] = 'rbxassetid://14368312652',
+	['Clae/assets/new/customsettings.png'] = 'rbxassetid://14403726449',
+	['Clae/assets/new/discord.png'] = '',
+	['Clae/assets/new/dots.png'] = 'rbxassetid://14368314459',
+	['Clae/assets/new/edit.png'] = 'rbxassetid://14368315443',
+	['Clae/assets/new/expandicon.png'] = 'rbxassetid://14368353032',
+	['Clae/assets/new/expandright.png'] = 'rbxassetid://14368316544',
+	['Clae/assets/new/expandup.png'] = 'rbxassetid://14368317595',
+	['Clae/assets/new/friendstab.png'] = 'rbxassetid://14397462778',
+	['Clae/assets/new/guisettings.png'] = 'rbxassetid://14368318994',
+	['Clae/assets/new/guislider.png'] = 'rbxassetid://14368320020',
+	['Clae/assets/new/guisliderrain.png'] = 'rbxassetid://14368321228',
+	['Clae/assets/new/guiv4.png'] = 'rbxassetid://14368322199',
+	['Clae/assets/new/guivape.png'] = 'rbxassetid://14657521312',
+	['Clae/assets/new/info.png'] = 'rbxassetid://14368324807',
+	['Clae/assets/new/inventoryicon.png'] = 'rbxassetid://14928011633',
+	['Clae/assets/new/legit.png'] = 'rbxassetid://14425650534',
+	['Clae/assets/new/legittab.png'] = 'rbxassetid://14426740825',
+	['Clae/assets/new/miniicon.png'] = 'rbxassetid://14368326029',
+	['Clae/assets/new/notification.png'] = 'rbxassetid://16738721069',
+	['Clae/assets/new/overlaysicon.png'] = 'rbxassetid://14368339581',
+	['Clae/assets/new/overlaystab.png'] = 'rbxassetid://14397380433',
+	['Clae/assets/new/pin.png'] = 'rbxassetid://14368342301',
+	['Clae/assets/new/profilesicon.png'] = 'rbxassetid://14397465323',
+	['Clae/assets/new/radaricon.png'] = 'rbxassetid://14368343291',
+	['Clae/assets/new/rainbow_1.png'] = 'rbxassetid://14368344374',
+	['Clae/assets/new/rainbow_2.png'] = 'rbxassetid://14368345149',
+	['Clae/assets/new/rainbow_3.png'] = 'rbxassetid://14368345840',
+	['Clae/assets/new/rainbow_4.png'] = 'rbxassetid://14368346696',
+	['Clae/assets/new/range.png'] = 'rbxassetid://14368347435',
+	['Clae/assets/new/rangearrow.png'] = 'rbxassetid://14368348640',
+	['Clae/assets/new/rendericon.png'] = 'rbxassetid://14368350193',
+	['Clae/assets/new/rendertab.png'] = 'rbxassetid://14397373458',
+	['Clae/assets/new/search.png'] = 'rbxassetid://14425646684',
+	['Clae/assets/new/targetinfoicon.png'] = 'rbxassetid://14368354234',
+	['Clae/assets/new/targetnpc1.png'] = 'rbxassetid://14497400332',
+	['Clae/assets/new/targetnpc2.png'] = 'rbxassetid://14497402744',
+	['Clae/assets/new/targetplayers1.png'] = 'rbxassetid://14497396015',
+	['Clae/assets/new/targetplayers2.png'] = 'rbxassetid://14497397862',
+	['Clae/assets/new/targetstab.png'] = 'rbxassetid://14497393895',
+	['Clae/assets/new/textguiicon.png'] = 'rbxassetid://14368355456',
+	['Clae/assets/new/textv4.png'] = 'rbxassetid://14368357095',
+	['Clae/assets/new/textvape.png'] = 'rbxassetid://14368358200',
+	['Clae/assets/new/utilityicon.png'] = 'rbxassetid://14368359107',
+	['Clae/assets/new/vape.png'] = 'rbxassetid://14373395239',
+	['Clae/assets/new/warning.png'] = 'rbxassetid://14368361552',
+	['Clae/assets/new/worldicon.png'] = 'rbxassetid://14368362492'
 }
 
 local isfile = isfile or function(file)
@@ -151,7 +146,7 @@ local function addBlur(parent, notif)
 	blur.Size = UDim2.new(1, 89, 1, 52)
 	blur.Position = UDim2.fromOffset(-48, -31)
 	blur.BackgroundTransparency = 1
-	blur.Image = getcustomasset('levi_shakingrass/assets/new/'..(notif and 'blurnotif' or 'blur')..'.png')
+	blur.Image = getcustomasset('Clae/assets/new/'..(notif and 'blurnotif' or 'blur')..'.png')
 	blur.ScaleType = Enum.ScaleType.Slice
 	blur.SliceCenter = Rect.new(52, 31, 261, 502)
 	blur.Parent = parent
@@ -175,7 +170,7 @@ local function addCloseButton(parent, offset)
 	close.BackgroundColor3 = Color3.new(1, 1, 1)
 	close.BackgroundTransparency = 1
 	close.AutoButtonColor = false
-	close.Image = getcustomasset('levi_shakingrass/assets/new/close.png')
+	close.Image = getcustomasset('Clae/assets/new/close.png')
 	close.ImageColor3 = color.Light(uipallet.Text, 0.2)
 	close.ImageTransparency = 0.5
 	close.Parent = parent
@@ -210,12 +205,6 @@ local function addMaid(object)
 		elseif type(callback) == 'function' then
 			table.insert(self.Connections, {
 				Disconnect = callback
-			})
-		elseif type(callback) == 'thread' then
-			table.insert(self.Connections, {
-				Disconnect = function()
-					pcall(task.cancel, callback)
-				end
 			})
 		else
 			table.insert(self.Connections, callback)
@@ -265,7 +254,7 @@ end
 local function createDownloader(text)
 	if mainapi.Loaded ~= true then
 		local downloader = mainapi.Downloader
-		if not downloader and not license.Closet then
+		if not downloader then
 			downloader = Instance.new('TextLabel')
 			downloader.Size = UDim2.new(1, 0, 0, 40)
 			downloader.BackgroundTransparency = 1
@@ -276,79 +265,35 @@ local function createDownloader(text)
 			downloader.Parent = mainapi.gui
 			mainapi.Downloader = downloader
 		end
-		pcall(function()
-			downloader.Text = 'Downloading '..text
-		end)
+		downloader.Text = 'Downloading '..text
 	end
 end
 
-local mobileButtonSize = {Value = 40}
-
 local function createMobileButton(buttonapi, position)
 	local heldbutton = false
-	local enabledColor = Color3.fromRGB(50, 160, 255)
-	local disabledColor = Color3.fromRGB(18, 17, 26)
-
 	local button = Instance.new('TextButton')
-	button.Size = UDim2.fromOffset(mobileButtonSize.Value, mobileButtonSize.Value)
+	button.Size = UDim2.fromOffset(40, 40)
 	button.Position = UDim2.fromOffset(position.X, position.Y)
 	button.AnchorPoint = Vector2.new(0.5, 0.5)
-	button.BackgroundColor3 = buttonapi.Enabled and enabledColor or disabledColor
-	button.BackgroundTransparency = 0.15
-	button.Text = ''
-	button.AutoButtonColor = false
+	button.BackgroundColor3 = buttonapi.Enabled and Color3.new(0, 0.7, 0) or Color3.new()
+	button.BackgroundTransparency = 0.5
+	button.Text = buttonapi.Name
+	button.TextColor3 = Color3.new(1, 1, 1)
+	button.TextScaled = true
+	button.Font = Enum.Font.Gotham
 	button.Parent = mainapi.gui
+	local buttonconstraint = Instance.new('UITextSizeConstraint')
+	buttonconstraint.MaxTextSize = 16
+	buttonconstraint.Parent = button
 	addCorner(button, UDim.new(1, 0))
-
-	local stroke = Instance.new('UIStroke')
-	stroke.Thickness = 1.5
-	stroke.Color = buttonapi.Enabled and enabledColor or Color3.fromRGB(70, 70, 100)
-	stroke.Transparency = 0.2
-	stroke.Parent = button
-
-	local gradient = Instance.new('UIGradient')
-	gradient.Color = ColorSequence.new({
-		ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
-		ColorSequenceKeypoint.new(1, Color3.fromRGB(180, 180, 180)),
-	})
-	gradient.Transparency = NumberSequence.new({
-		NumberSequenceKeypoint.new(0, 0.05),
-		NumberSequenceKeypoint.new(1, 0.25),
-	})
-	gradient.Rotation = 135
-	gradient.Parent = button
-
-	local label = Instance.new('TextLabel')
-	label.Size = UDim2.fromScale(1, 1)
-	label.BackgroundTransparency = 1
-	label.Text = buttonapi.Name
-	label.TextColor3 = Color3.fromRGB(230, 235, 255)
-	label.TextScaled = true
-	label.FontFace = Font.fromEnum(Enum.Font.GothamBold)
-	label.TextStrokeTransparency = 0.6
-	label.Parent = button
-	local labelconstraint = Instance.new('UITextSizeConstraint')
-	labelconstraint.MaxTextSize = 13
-	labelconstraint.Parent = label
-
-	local function updateColors(enabled)
-		tweenService:Create(button, TweenInfo.new(0.18, Enum.EasingStyle.Quad), {
-			BackgroundColor3 = enabled and enabledColor or disabledColor,
-		}):Play()
-		tweenService:Create(stroke, TweenInfo.new(0.18, Enum.EasingStyle.Quad), {
-			Color = enabled and enabledColor or Color3.fromRGB(70, 70, 100),
-		}):Play()
-	end
 
 	button.MouseButton1Down:Connect(function()
 		heldbutton = true
-		tweenService:Create(button, TweenInfo.new(0.1), {BackgroundTransparency = 0.4}):Play()
 		local holdtime, holdpos = tick(), inputService:GetMouseLocation()
 		repeat
 			heldbutton = (inputService:GetMouseLocation() - holdpos).Magnitude < 6
 			task.wait()
 		until (tick() - holdtime) > 1 or not heldbutton
-		tweenService:Create(button, TweenInfo.new(0.1), {BackgroundTransparency = 0.15}):Play()
 		if heldbutton then
 			buttonapi.Bind = {}
 			button:Destroy()
@@ -356,11 +301,10 @@ local function createMobileButton(buttonapi, position)
 	end)
 	button.MouseButton1Up:Connect(function()
 		heldbutton = false
-		tweenService:Create(button, TweenInfo.new(0.1), {BackgroundTransparency = 0.15}):Play()
 	end)
 	button.MouseButton1Click:Connect(function()
 		buttonapi:Toggle()
-		updateColors(buttonapi.Enabled)
+		button.BackgroundColor3 = buttonapi.Enabled and Color3.new(0, 0.7, 0) or Color3.new()
 	end)
 
 	buttonapi.Bind = {Button = button}
@@ -370,7 +314,7 @@ local function downloadFile(path, func)
 	if not isfile(path) then
 		createDownloader(path)
 		local suc, res = pcall(function()
-			return game:HttpGet('https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/'..readfile('levi_shakingrass/profiles/commit.txt')..'/'..select(1, path:gsub('levi_shakingrass/', '')), true)
+			return game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'..readfile('Clae/profiles/commit.txt')..'/'..select(1, path:gsub('Clae/', '')), true)
 		end)
 		if not suc or res == '404: Not Found' then
 			error(res)
@@ -383,12 +327,8 @@ local function downloadFile(path, func)
 	return (func or readfile)(path)
 end
 
-getcustomasset = assetfunction and function(path)
-	local suc, res = pcall(downloadFile, path, assetfunction)
-	if suc then
-		return res
-	end
-	return getcustomassets[path] or ''
+getcustomasset = not inputService.TouchEnabled and assetfunction and function(path)
+	return downloadFile(path, assetfunction)
 end or function(path)
 	return getcustomassets[path] or ''
 end
@@ -415,8 +355,6 @@ local function loadJson(path)
 	return suc and type(res) == 'table' and res or nil
 end
 
-downloadFile('levi_shakingrass/profiles/features.json')
-local newModules = loadJson('levi_shakingrass/profiles/features.json') or {}
 local function makeDraggable(gui, window)
 	gui.InputBegan:Connect(function(inputObj)
 		if window and not window.Visible then return end
@@ -469,7 +407,7 @@ local function removeTags(str)
 end
 
 do
-	local res = isfile('levi_shakingrass/profiles/color.txt') and loadJson('levi_shakingrass/profiles/color.txt')
+	local res = isfile('Clae/profiles/color.txt') and loadJson('Clae/profiles/color.txt')
 	if res then
 		uipallet.Main = res.Main and Color3.fromRGB(unpack(res.Main)) or uipallet.Main
 		uipallet.Text = res.Text and Color3.fromRGB(unpack(res.Text)) or uipallet.Text
@@ -558,10 +496,9 @@ mainapi.Libraries = {
 local components
 components = {
 	Button = function(optionsettings, children, api)
-		local height = optionsettings.Height or 31
 		local button = Instance.new('TextButton')
 		button.Name = optionsettings.Name..'Button'
-		button.Size = UDim2.new(1, 0, 0, height)
+		button.Size = UDim2.new(1, 0, 0, 31)
 		button.BackgroundColor3 = color.Dark(children.BackgroundColor3, optionsettings.Darker and 0.02 or 0)
 		button.BorderSizePixel = 0
 		button.AutoButtonColor = false
@@ -570,7 +507,7 @@ components = {
 		button.Parent = children
 		addTooltip(button, optionsettings.Tooltip)
 		local bkg = Instance.new('Frame')
-		bkg.Size = UDim2.fromOffset(200, height - 4)
+		bkg.Size = UDim2.fromOffset(200, 27)
 		bkg.Position = UDim2.fromOffset(10, 2)
 		bkg.BackgroundColor3 = color.Light(uipallet.Main, 0.05)
 		bkg.Parent = button
@@ -757,7 +694,7 @@ components = {
 		preview.Size = UDim2.fromOffset(12, 12)
 		preview.Position = UDim2.new(1, -22, 0, 10)
 		preview.BackgroundTransparency = 1
-		preview.Image = getcustomasset('levi_shakingrass/assets/new/colorpreview.png')
+		preview.Image = getcustomasset('Clae/assets/new/colorpreview.png')
 		preview.ImageColor3 = Color3.fromHSV(optionapi.Hue, optionapi.Sat, optionapi.Value)
 		preview.ImageTransparency = 1 - optionapi.Opacity
 		preview.Parent = slider
@@ -773,7 +710,7 @@ components = {
 		expand.Size = UDim2.fromOffset(9, 5)
 		expand.Position = UDim2.fromOffset(4, 4)
 		expand.BackgroundTransparency = 1
-		expand.Image = getcustomasset('levi_shakingrass/assets/new/expandicon.png')
+		expand.Image = getcustomasset('Clae/assets/new/expandicon.png')
 		expand.ImageColor3 = color.Dark(uipallet.Text, 0.43)
 		expand.Parent = expandbutton
 		local rainbow = Instance.new('TextButton')
@@ -786,17 +723,17 @@ components = {
 		local rainbow1 = Instance.new('ImageLabel')
 		rainbow1.Size = UDim2.fromOffset(12, 12)
 		rainbow1.BackgroundTransparency = 1
-		rainbow1.Image = getcustomasset('levi_shakingrass/assets/new/rainbow_1.png')
+		rainbow1.Image = getcustomasset('Clae/assets/new/rainbow_1.png')
 		rainbow1.ImageColor3 = color.Light(uipallet.Main, 0.37)
 		rainbow1.Parent = rainbow
 		local rainbow2 = rainbow1:Clone()
-		rainbow2.Image = getcustomasset('levi_shakingrass/assets/new/rainbow_2.png')
+		rainbow2.Image = getcustomasset('Clae/assets/new/rainbow_2.png')
 		rainbow2.Parent = rainbow
 		local rainbow3 = rainbow1:Clone()
-		rainbow3.Image = getcustomasset('levi_shakingrass/assets/new/rainbow_3.png')
+		rainbow3.Image = getcustomasset('Clae/assets/new/rainbow_3.png')
 		rainbow3.Parent = rainbow
 		local rainbow4 = rainbow1:Clone()
-		rainbow4.Image = getcustomasset('levi_shakingrass/assets/new/rainbow_4.png')
+		rainbow4.Image = getcustomasset('Clae/assets/new/rainbow_4.png')
 		rainbow4.Parent = rainbow
 		local knobholder = Instance.new('Frame')
 		knobholder.Name = 'Knob'
@@ -1061,7 +998,7 @@ components = {
 		arrow.Size = UDim2.fromOffset(4, 8)
 		arrow.Position = UDim2.new(1, -17, 0, 11)
 		arrow.BackgroundTransparency = 1
-		arrow.Image = getcustomasset('levi_shakingrass/assets/new/expandright.png')
+		arrow.Image = getcustomasset('Clae/assets/new/expandright.png')
 		arrow.ImageColor3 = Color3.fromRGB(140, 140, 140)
 		arrow.Rotation = 90
 		arrow.Parent = button
@@ -1472,7 +1409,7 @@ components = {
 		icon.Size = UDim2.fromOffset(18, 12)
 		icon.Position = UDim2.fromOffset(10, 15)
 		icon.BackgroundTransparency = 1
-		icon.Image = getcustomasset('levi_shakingrass/assets/new/targetstab.png')
+		icon.Image = getcustomasset('Clae/assets/new/targetstab.png')
 		icon.Parent = window
 		local title = Instance.new('TextLabel')
 		title.Name = 'Title'
@@ -1534,20 +1471,20 @@ components = {
 		
 		optionapi.Players = components.TargetsButton({
 			Position = UDim2.fromOffset(11, 45),
-			Icon = getcustomasset('levi_shakingrass/assets/new/targetplayers1.png'),
+			Icon = getcustomasset('Clae/assets/new/targetplayers1.png'),
 			IconSize = UDim2.fromOffset(15, 16),
 			IconParent = tool,
-			ToolIcon = getcustomasset('levi_shakingrass/assets/new/targetplayers2.png'),
+			ToolIcon = getcustomasset('Clae/assets/new/targetplayers2.png'),
 			ToolSize = UDim2.fromOffset(11, 12),
 			Tooltip = 'Players',
 			Function = optionsettings.Function
 		}, window, tool)
 		optionapi.NPCs = components.TargetsButton({
 			Position = UDim2.fromOffset(112, 45),
-			Icon = getcustomasset('levi_shakingrass/assets/new/targetnpc1.png'),
+			Icon = getcustomasset('Clae/assets/new/targetnpc1.png'),
 			IconSize = UDim2.fromOffset(12, 16),
 			IconParent = tool,
-			ToolIcon = getcustomasset('levi_shakingrass/assets/new/targetnpc2.png'),
+			ToolIcon = getcustomasset('Clae/assets/new/targetnpc2.png'),
 			ToolSize = UDim2.fromOffset(9, 12),
 			Tooltip = 'NPCs',
 			Function = optionsettings.Function
@@ -1619,7 +1556,7 @@ components = {
 		end)
 		textlist:GetPropertyChangedSignal('AbsolutePosition'):Connect(function()
 			if mainapi.ThreadFix then
-				pcall(_setIdentity, 8)
+				setthreadidentity(8)
 			end
 			local actualPosition = (textlist.AbsolutePosition + Vector2.new(0, 60)) / scale.Scale
 			window.Position = UDim2.fromOffset(actualPosition.X + 220, actualPosition.Y)
@@ -1716,10 +1653,10 @@ components = {
 			Value = optionsettings.Default or '',
 			Index = 0
 		}
-		local height = optionsettings.Height or 58
+		
 		local textbox = Instance.new('TextButton')
 		textbox.Name = optionsettings.Name..'TextBox'
-		textbox.Size = UDim2.new(1, 0, 0, height)
+		textbox.Size = UDim2.new(1, 0, 0, 58)
 		textbox.BackgroundColor3 = color.Dark(children.BackgroundColor3, optionsettings.Darker and 0.02 or 0)
 		textbox.BorderSizePixel = 0
 		textbox.AutoButtonColor = false
@@ -1739,7 +1676,7 @@ components = {
 		title.Parent = textbox
 		local bkg = Instance.new('Frame')
 		bkg.Name = 'BKG'
-		bkg.Size = UDim2.new(1, -20, 0, height - 29)
+		bkg.Size = UDim2.new(1, -20, 0, 29)
 		bkg.Position = UDim2.fromOffset(10, 23)
 		bkg.BackgroundColor3 = color.Light(uipallet.Main, 0.02)
 		bkg.Parent = textbox
@@ -1831,7 +1768,7 @@ components = {
 		buttonicon.Size = UDim2.fromOffset(14, 12)
 		buttonicon.Position = UDim2.fromOffset(10, 14)
 		buttonicon.BackgroundTransparency = 1
-		buttonicon.Image = optionsettings.Icon or getcustomasset('levi_shakingrass/assets/new/allowedicon.png')
+		buttonicon.Image = optionsettings.Icon or getcustomasset('Clae/assets/new/allowedicon.png')
 		buttonicon.Parent = button
 		local buttontitle = Instance.new('TextLabel')
 		buttontitle.Name = 'Title'
@@ -1877,7 +1814,7 @@ components = {
 		icon.Size = optionsettings.TabSize or UDim2.fromOffset(19, 16)
 		icon.Position = UDim2.fromOffset(10, 13)
 		icon.BackgroundTransparency = 1
-		icon.Image = optionsettings.Tab or getcustomasset('levi_shakingrass/assets/new/allowedtab.png')
+		icon.Image = optionsettings.Tab or getcustomasset('Clae/assets/new/allowedtab.png')
 		icon.Parent = window
 		local title = Instance.new('TextLabel')
 		title.Name = 'Title'
@@ -1920,7 +1857,7 @@ components = {
 		addbutton.Size = UDim2.fromOffset(16, 16)
 		addbutton.Position = UDim2.new(1, -26, 0, 8)
 		addbutton.BackgroundTransparency = 1
-		addbutton.Image = getcustomasset('levi_shakingrass/assets/new/add.png')
+		addbutton.Image = getcustomasset('Clae/assets/new/add.png')
 		addbutton.ImageColor3 = optionsettings.Color
 		addbutton.ImageTransparency = 0.3
 		addbutton.Parent = addbkg
@@ -2024,7 +1961,7 @@ components = {
 				close.BackgroundColor3 = Color3.new(1, 1, 1)
 				close.BackgroundTransparency = 1
 				close.AutoButtonColor = false
-				close.Image = getcustomasset('levi_shakingrass/assets/new/closemini.png')
+				close.Image = getcustomasset('Clae/assets/new/closemini.png')
 				close.ImageColor3 = color.Light(uipallet.Text, 0.2)
 				close.ImageTransparency = 0.5
 				close.Parent = object
@@ -2129,7 +2066,7 @@ components = {
 		end)
 		textlist:GetPropertyChangedSignal('AbsolutePosition'):Connect(function()
 			if mainapi.ThreadFix then
-				pcall(_setIdentity, 8)
+				setthreadidentity(8)
 			end
 			local actualPosition = (textlist.AbsolutePosition - (api.Legit and mainapi.Legit.Window.AbsolutePosition or -guiService:GetGuiInset())) / scale.Scale
 			window.Position = UDim2.fromOffset(actualPosition.X + 220, actualPosition.Y)
@@ -2205,14 +2142,7 @@ components = {
 			tween:Tween(knob, uipallet.Tween, {
 				Position = UDim2.fromOffset(self.Enabled and 12 or 2, 2)
 			})
-			xpcall(function()
-				optionsettings.Function(self.Enabled)
-			end, function(err)
-				if shared.VapeDeveloper then
-					mainapi:CreateNotification('Vape', 'gui error: '.. err, 15, 'warning')
-					task.defer(error, err)
-				end	
-			end)
+			optionsettings.Function(self.Enabled)
 		end
 		
 		toggle.MouseEnter:Connect(function()
@@ -2331,7 +2261,7 @@ components = {
 		knob.Position = UDim2.fromScale(0.5, 0.5)
 		knob.AnchorPoint = Vector2.new(0.5, 0.5)
 		knob.BackgroundTransparency = 1
-		knob.Image = getcustomasset('levi_shakingrass/assets/new/range.png')
+		knob.Image = getcustomasset('Clae/assets/new/range.png')
 		knob.ImageColor3 = Color3.fromHSV(mainapi.GUIColor.Hue, mainapi.GUIColor.Sat, mainapi.GUIColor.Value)
 		knob.Parent = knobholder
 		local knobholdermax = knobholder:Clone()
@@ -2344,7 +2274,7 @@ components = {
 		arrow.Size = UDim2.fromOffset(12, 6)
 		arrow.Position = UDim2.new(1, -56, 0, 10)
 		arrow.BackgroundTransparency = 1
-		arrow.Image = getcustomasset('levi_shakingrass/assets/new/rangearrow.png')
+		arrow.Image = getcustomasset('Clae/assets/new/rangearrow.png')
 		arrow.ImageColor3 = color.Light(uipallet.Main, 0.14)
 		arrow.Parent = slider
 		optionsettings.Function = optionsettings.Function or function() end
@@ -2526,8 +2456,8 @@ task.spawn(function()
 end)
 
 function mainapi:BlurCheck()
-	if self.ThreadFix and not inputService.TouchEnabled then
-		pcall(_setIdentity, 8)
+	if self.ThreadFix then
+		setthreadidentity(8)
 		runService:SetRobloxGuiFocused((clickgui.Visible or guiService:GetErrorType() ~= Enum.ConnectionError.OK) and self.Blur.Enabled)
 	end
 end
@@ -2551,45 +2481,21 @@ function mainapi:CreateGUI()
 	addBlur(window)
 	addCorner(window)
 	makeDraggable(window)
-	local leviIcon = Instance.new('ImageLabel')
-	leviIcon.Size = UDim2.fromOffset(22, 22)
-	leviIcon.BackgroundTransparency = 1
-	leviIcon.ImageColor3 = Color3.fromRGB(100, 180, 255)
-	local logo = Instance.new('TextLabel')
+	local logo = Instance.new('ImageLabel')
 	logo.Name = 'VapeLogo'
-	logo.Size = UDim2.fromOffset(110, 30)
-	logo.Position = UDim2.fromOffset(34, 4)
+	logo.Size = UDim2.fromOffset(62, 18)
+	logo.Position = UDim2.fromOffset(11, 10)
 	logo.BackgroundTransparency = 1
-	logo.Text = 'LEVI'
-	logo.TextColor3 = Color3.fromRGB(100, 180, 255)
-	logo.TextSize = 18
-	logo.FontFace = Font.fromEnum(Enum.Font.GothamBold)
-	logo.TextXAlignment = Enum.TextXAlignment.Left
+	logo.Image = getcustomasset('Clae/assets/new/guivape.png')
+	logo.ImageColor3 = select(3, uipallet.Main:ToHSV()) > 0.5 and uipallet.Text or Color3.new(1, 1, 1)
 	logo.Parent = window
-	leviIcon.Name = 'V4Logo'
-	leviIcon.Position = UDim2.fromOffset(-26, 4)
-	leviIcon.Parent = logo
-	task.spawn(function()
-		local iconFile = 'levi_icon.png'
-		if getcustomasset and writefile and isfile then
-			if not isfile(iconFile) then
-				local ok, body = pcall(game.HttpGet, game, 'https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/main/assets/leviathan.png')
-				if ok and body and #body > 100 then
-					writefile(iconFile, body)
-				end
-			end
-			if isfile(iconFile) then
-				leviIcon.Image = getcustomasset(iconFile)
-			end
-		end
-	end)
-	local logoGradient = Instance.new('UIGradient')
-	logoGradient.Color = ColorSequence.new({
-		ColorSequenceKeypoint.new(0, Color3.fromRGB(80, 160, 255)),
-		ColorSequenceKeypoint.new(1, Color3.fromRGB(160, 80, 255))
-	})
-	logoGradient.Rotation = 45
-	logoGradient.Parent = logo
+	local logov4 = Instance.new('ImageLabel')
+	logov4.Name = 'V4Logo'
+	logov4.Size = UDim2.fromOffset(28, 16)
+	logov4.Position = UDim2.new(1, 1, 0, 1)
+	logov4.BackgroundTransparency = 1
+	logov4.Image = getcustomasset('Clae/assets/new/guiv4.png')
+	logov4.Parent = logo
 	local children = Instance.new('Frame')
 	children.Name = 'Children'
 	children.Size = UDim2.new(1, 0, 1, -33)
@@ -2612,15 +2518,14 @@ function mainapi:CreateGUI()
 	settingsicon.Size = UDim2.fromOffset(14, 14)
 	settingsicon.Position = UDim2.fromOffset(15, 12)
 	settingsicon.BackgroundTransparency = 1
-	settingsicon.Image = getcustomasset('levi_shakingrass/assets/new/guisettings.png')
+	settingsicon.Image = getcustomasset('Clae/assets/new/guisettings.png')
 	settingsicon.ImageColor3 = color.Light(uipallet.Main, 0.37)
 	settingsicon.Parent = settingsbutton
 	local discordbutton = Instance.new('ImageButton')
-	local discordSz = inputService.TouchEnabled and 32 or 16
-	discordbutton.Size = UDim2.fromOffset(discordSz, discordSz)
-	discordbutton.Position = inputService.TouchEnabled and UDim2.new(1, -82, 0, 4) or UDim2.new(1, -56, 0, 11)
+	discordbutton.Size = UDim2.fromOffset(16, 16)
+	discordbutton.Position = UDim2.new(1, -56, 0, 11)
 	discordbutton.BackgroundTransparency = 1
-	discordbutton.Image = getcustomasset('levi_shakingrass/assets/new/discord.png')
+	discordbutton.Image = getcustomasset('Clae/assets/new/discord.png')
 	discordbutton.Parent = window
 	addTooltip(discordbutton, 'Join discord')
 	local settingspane = Instance.new('TextButton')
@@ -2647,7 +2552,7 @@ function mainapi:CreateGUI()
 	back.Size = UDim2.fromOffset(16, 16)
 	back.Position = UDim2.fromOffset(11, 13)
 	back.BackgroundTransparency = 1
-	back.Image = getcustomasset('levi_shakingrass/assets/new/back.png')
+	back.Image = getcustomasset('Clae/assets/new/back.png')
 	back.ImageColor3 = color.Light(uipallet.Main, 0.37)
 	back.Parent = settingspane
 	local settingsversion = Instance.new('TextLabel')
@@ -2656,7 +2561,7 @@ function mainapi:CreateGUI()
 	settingsversion.Position = UDim2.new(0, 0, 1, -16)
 	settingsversion.BackgroundTransparency = 1
 	settingsversion.Text = 'Vape '..mainapi.Version..' '..(
-		isfile('levi_shakingrass/profiles/commit.txt') and readfile('levi_shakingrass/profiles/commit.txt'):sub(1, 6) or ''
+		isfile('Clae/profiles/commit.txt') and readfile('Clae/profiles/commit.txt'):sub(1, 6) or ''
 	)..' '
 	settingsversion.TextColor3 = color.Dark(uipallet.Text, 0.43)
 	settingsversion.TextXAlignment = Enum.TextXAlignment.Right
@@ -2710,7 +2615,7 @@ function mainapi:CreateGUI()
 		icon.Size = UDim2.fromOffset(12, 12)
 		icon.Position = UDim2.new(0.5, -6, 0, 5)
 		icon.BackgroundTransparency = 1
-		icon.Image = getcustomasset('levi_shakingrass/assets/new/bind.png')
+		icon.Image = getcustomasset('Clae/assets/new/bind.png')
 		icon.ImageColor3 = color.Dark(uipallet.Text, 0.43)
 		icon.Parent = bind
 		local label = Instance.new('TextLabel')
@@ -2743,13 +2648,13 @@ function mainapi:CreateGUI()
 		bind.MouseEnter:Connect(function()
 			label.Visible = false
 			icon.Visible = not label.Visible
-			icon.Image = getcustomasset('levi_shakingrass/assets/new/edit.png')
+			icon.Image = getcustomasset('Clae/assets/new/edit.png')
 			icon.ImageColor3 = color.Dark(uipallet.Text, 0.16)
 		end)
 		bind.MouseLeave:Connect(function()
 			label.Visible = true
 			icon.Visible = not label.Visible
-			icon.Image = getcustomasset('levi_shakingrass/assets/new/bind.png')
+			icon.Image = getcustomasset('Clae/assets/new/bind.png')
 			icon.ImageColor3 = color.Dark(uipallet.Text, 0.43)
 		end)
 		bind.MouseButton1Click:Connect(function()
@@ -2810,7 +2715,7 @@ function mainapi:CreateGUI()
 		arrow.Size = UDim2.fromOffset(4, 8)
 		arrow.Position = UDim2.new(1, -20, 0, 16)
 		arrow.BackgroundTransparency = 1
-		arrow.Image = getcustomasset('levi_shakingrass/assets/new/expandright.png')
+		arrow.Image = getcustomasset('Clae/assets/new/expandright.png')
 		arrow.ImageColor3 = color.Light(uipallet.Main, 0.37)
 		arrow.Parent = button
 		optionapi.Name = categorysettings.Name
@@ -2872,7 +2777,7 @@ function mainapi:CreateGUI()
 		button.Position = UDim2.new(1, -29, 0, 7)
 		button.BackgroundTransparency = 1
 		button.AutoButtonColor = false
-		button.Image = getcustomasset('levi_shakingrass/assets/new/overlaysicon.png')
+		button.Image = getcustomasset('Clae/assets/new/overlaysicon.png')
 		button.ImageColor3 = color.Light(uipallet.Main, 0.37)
 		button.Parent = bar
 		addCorner(button, UDim.new(1, 0))
@@ -2899,7 +2804,7 @@ function mainapi:CreateGUI()
 		icon.Size = UDim2.fromOffset(14, 12)
 		icon.Position = UDim2.fromOffset(10, 13)
 		icon.BackgroundTransparency = 1
-		icon.Image = getcustomasset('levi_shakingrass/assets/new/overlaystab.png')
+		icon.Image = getcustomasset('Clae/assets/new/overlaystab.png')
 		icon.ImageColor3 = uipallet.Text
 		icon.Parent = window
 		local title = Instance.new('TextLabel')
@@ -3056,7 +2961,7 @@ function mainapi:CreateGUI()
 		end)
 		windowlist:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
 			if mainapi.ThreadFix then
-				pcall(_setIdentity, 8)
+				setthreadidentity(8)
 			end
 			window.Size = UDim2.fromOffset(220, math.min(37 + windowlist.AbsoluteContentSize.Y / scale.Scale, 605))
 			childrentoggle.Size = UDim2.fromOffset(220, window.Size.Y.Offset - 5)
@@ -3091,7 +2996,7 @@ function mainapi:CreateGUI()
 		arrow.Size = UDim2.fromOffset(4, 8)
 		arrow.Position = UDim2.new(1, -20, 0, 16)
 		arrow.BackgroundTransparency = 1
-		arrow.Image = getcustomasset('levi_shakingrass/assets/new/expandright.png')
+		arrow.Image = getcustomasset('Clae/assets/new/expandright.png')
 		arrow.ImageColor3 = color.Light(uipallet.Main, 0.37)
 		arrow.Parent = button
 		local settingspane = Instance.new('TextButton')
@@ -3118,7 +3023,7 @@ function mainapi:CreateGUI()
 		back.Size = UDim2.fromOffset(16, 16)
 		back.Position = UDim2.fromOffset(11, 13)
 		back.BackgroundTransparency = 1
-		back.Image = getcustomasset('levi_shakingrass/assets/new/back.png')
+		back.Image = getcustomasset('Clae/assets/new/back.png')
 		back.ImageColor3 = color.Light(uipallet.Main, 0.37)
 		back.Parent = settingspane
 		addCorner(settingspane)
@@ -3172,7 +3077,7 @@ function mainapi:CreateGUI()
 		end)
 		windowlist:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
 			if mainapi.ThreadFix then
-				pcall(_setIdentity, 8)
+				setthreadidentity(8)
 			end
 			window.Size = UDim2.fromOffset(220, 45 + windowlist.AbsoluteContentSize.Y / scale.Scale)
 			for _, v in categoryapi.Buttons do
@@ -3366,7 +3271,7 @@ function mainapi:CreateGUI()
 		preview.Size = UDim2.fromOffset(12, 12)
 		preview.Position = UDim2.new(1, -22, 0, 10)
 		preview.BackgroundTransparency = 1
-		preview.Image = getcustomasset('levi_shakingrass/assets/new/colorpreview.png')
+		preview.Image = getcustomasset('Clae/assets/new/colorpreview.png')
 		preview.ImageColor3 = Color3.fromHSV(optionapi.Hue, 1, 1)
 		preview.Parent = slider
 		local valuebox = Instance.new('TextBox')
@@ -3394,7 +3299,7 @@ function mainapi:CreateGUI()
 		expandicon.Size = UDim2.fromOffset(9, 5)
 		expandicon.Position = UDim2.fromOffset(4, 4)
 		expandicon.BackgroundTransparency = 1
-		expandicon.Image = getcustomasset('levi_shakingrass/assets/new/expandicon.png')
+		expandicon.Image = getcustomasset('Clae/assets/new/expandicon.png')
 		expandicon.ImageColor3 = color.Dark(uipallet.Text, 0.43)
 		expandicon.Parent = expandbutton
 		local rainbow = Instance.new('TextButton')
@@ -3407,24 +3312,24 @@ function mainapi:CreateGUI()
 		local rainbow1 = Instance.new('ImageLabel')
 		rainbow1.Size = UDim2.fromOffset(12, 12)
 		rainbow1.BackgroundTransparency = 1
-		rainbow1.Image = getcustomasset('levi_shakingrass/assets/new/rainbow_1.png')
+		rainbow1.Image = getcustomasset('Clae/assets/new/rainbow_1.png')
 		rainbow1.ImageColor3 = color.Light(uipallet.Main, 0.37)
 		rainbow1.Parent = rainbow
 		local rainbow2 = rainbow1:Clone()
-		rainbow2.Image = getcustomasset('levi_shakingrass/assets/new/rainbow_2.png')
+		rainbow2.Image = getcustomasset('Clae/assets/new/rainbow_2.png')
 		rainbow2.Parent = rainbow
 		local rainbow3 = rainbow1:Clone()
-		rainbow3.Image = getcustomasset('levi_shakingrass/assets/new/rainbow_3.png')
+		rainbow3.Image = getcustomasset('Clae/assets/new/rainbow_3.png')
 		rainbow3.Parent = rainbow
 		local rainbow4 = rainbow1:Clone()
-		rainbow4.Image = getcustomasset('levi_shakingrass/assets/new/rainbow_4.png')
+		rainbow4.Image = getcustomasset('Clae/assets/new/rainbow_4.png')
 		rainbow4.Parent = rainbow
 		local knob = Instance.new('ImageLabel')
 		knob.Name = 'Knob'
 		knob.Size = UDim2.fromOffset(26, 12)
 		knob.Position = UDim2.fromOffset(slidercolorpos[4] - 3, -5)
 		knob.BackgroundTransparency = 1
-		knob.Image = getcustomasset('levi_shakingrass/assets/new/guislider.png')
+		knob.Image = getcustomasset('Clae/assets/new/guislider.png')
 		knob.ImageColor3 = slidercolors[4]
 		knob.Parent = holder
 		optionsettings.Function = optionsettings.Function or function() end
@@ -3441,8 +3346,8 @@ function mainapi:CreateGUI()
 			ColorSequenceKeypoint.new(0, Color3.fromHSV(0, 0, 0)),
 			ColorSequenceKeypoint.new(1, Color3.fromHSV(optionapi.Hue, optionapi.Sat, 1))
 		}))
-		local normalknob = getcustomasset('levi_shakingrass/assets/new/guislider.png')
-		local rainbowknob = getcustomasset('levi_shakingrass/assets/new/guisliderrain.png')
+		local normalknob = getcustomasset('Clae/assets/new/guislider.png')
+		local rainbowknob = getcustomasset('Clae/assets/new/guisliderrain.png')
 		local rainbowthread
 
 		function optionapi:Save(tab)
@@ -3664,14 +3569,14 @@ function mainapi:CreateGUI()
 			local body = httpService:JSONEncode({
 				nonce = httpService:GenerateGUID(false),
 				args = {
-					invite = {code = 'levi'},
-					code = 'levi'
+					invite = {code = '5gJqhQmrdS'},
+					code = '5gJqhQmrdS'
 				},
 				cmd = 'INVITE_BROWSER'
 			})
 
 			for i = 1, 14 do
-				task.defer(function()
+				task.spawn(function()
 					request({
 						Method = 'POST',
 						Url = 'http://127.0.0.1:64'..(53 + i)..'/rpc?v=1',
@@ -3687,7 +3592,7 @@ function mainapi:CreateGUI()
 
 		task.spawn(function()
 			tooltip.Text = 'Copied!'
-			setclipboard('https://discord.gg/levi')
+			setclipboard('https://discord.gg/5gJqhQmrdS')
 		end)
 	end)
 	settingsbutton.MouseEnter:Connect(function()
@@ -3700,8 +3605,8 @@ function mainapi:CreateGUI()
 		settingspane.Visible = true
 	end)
 	windowlist:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-		if _setIdentity then
-			pcall(_setIdentity, 8)
+		if self.ThreadFix then
+			setthreadidentity(8)
 		end
 		window.Size = UDim2.fromOffset(220, 42 + windowlist.AbsoluteContentSize.Y / scale.Scale)
 		for _, v in categoryapi.Buttons do
@@ -3765,7 +3670,7 @@ function mainapi:CreateCategory(categorysettings)
 	arrow.Size = UDim2.fromOffset(9, 4)
 	arrow.Position = UDim2.fromOffset(20, 18)
 	arrow.BackgroundTransparency = 1
-	arrow.Image = getcustomasset('levi_shakingrass/assets/new/expandup.png')
+	arrow.Image = getcustomasset('Clae/assets/new/expandup.png')
 	arrow.ImageColor3 = Color3.fromRGB(140, 140, 140)
 	arrow.Rotation = 180
 	arrow.Parent = arrowbutton
@@ -3800,7 +3705,6 @@ function mainapi:CreateCategory(categorysettings)
 			Enabled = false,
 			Options = {},
 			Bind = {},
-			Tags = {},
 			Index = getTableSize(mainapi.Modules),
 			ExtraText = modulesettings.ExtraText,
 			Name = modulesettings.Name,
@@ -3820,57 +3724,6 @@ function mainapi:CreateCategory(categorysettings)
 		modulebutton.TextSize = 14
 		modulebutton.FontFace = uipallet.Font
 		modulebutton.Parent = children
-		local indicatorholder = Instance.new('Frame')
-		indicatorholder.Parent = modulebutton
-		indicatorholder.Size = UDim2.fromOffset(0, 21)
-		indicatorholder.AnchorPoint = Vector2.new(0, 0.5)
-		indicatorholder.Name = 'Indicators'
-		indicatorholder.BackgroundTransparency = 1
-		indicatorholder.Position = UDim2.fromScale(0.85, 0.5)
-
-		do
-			local layout = Instance.new('UIListLayout')
-			layout.Parent = indicatorholder
-			layout.HorizontalAlignment = Enum.HorizontalAlignment.Right
-			layout.VerticalAlignment = Enum.VerticalAlignment.Center
-			layout.FillDirection = Enum.FillDirection.Horizontal
-			layout.Padding = UDim.new(0, 5)
-		end
-
-		modulesettings.Tags = modulesettings.Tags or {}
-		pcall(function()
-			if table.find(newModules, moduleapi.Name) then
-				table.insert(modulesettings.Tags, 'new')
-			end
-			for i, tag in modulesettings.Tags do
-				tag = tag:upper()
-				local size = getfontsize(removeTags(tag), 12, uipallet.Font, Vector2.new(100000, 100000))
-				local indicator = Instance.new('TextLabel')
-				indicator.LayoutOrder = i - 1
-				indicator.Size = UDim2.new(0, size.X + 4, 0, 21)
-				indicator.BackgroundColor3 = Color3.new(1, 1, 1)
-				indicator.TextSize = 14
-				indicator.TextTransparency = 1
-				indicator.Text = tag
-				indicator.Name = tag
-				indicator.Position = UDim2.new()
-				indicator.TextColor3 = Color3.new(0, 0, 0)
-				indicator.FontFace = uipallet.Font
-				indicator.Parent = indicatorholder
-				addCorner(indicator, UDim.new(0, 5))
-				local text = indicator:Clone()
-				text.Position = UDim2.new()
-				text.Size = UDim2.fromScale(1, 1)
-				text.BackgroundTransparency = 1
-				text.Name = 'Text'
-				text.AnchorPoint = Vector2.new()
-				text.TextSize = 12
-				text.TextTransparency = 0
-				text.Parent = indicator
-				table.insert(moduleapi.Tags, indicator)
-				indicator.Visible = tag ~= 'MATCHED'
-			end
-		end)
 		local gradient = Instance.new('UIGradient')
 		gradient.Rotation = 90
 		gradient.Enabled = false
@@ -3895,7 +3748,7 @@ function mainapi:CreateCategory(categorysettings)
 		bindicon.Size = UDim2.fromOffset(12, 12)
 		bindicon.Position = UDim2.new(0.5, -6, 0, 5)
 		bindicon.BackgroundTransparency = 1
-		bindicon.Image = getcustomasset('levi_shakingrass/assets/new/bind.png')
+		bindicon.Image = getcustomasset('Clae/assets/new/bind.png')
 		bindicon.ImageColor3 = color.Dark(uipallet.Text, 0.43)
 		bindicon.Parent = bind
 		local bindtext = Instance.new('TextLabel')
@@ -3913,7 +3766,7 @@ function mainapi:CreateCategory(categorysettings)
 		bindcover.Size = UDim2.fromOffset(154, 40)
 		bindcover.BackgroundTransparency = 1
 		bindcover.Visible = false
-		bindcover.Image = getcustomasset('levi_shakingrass/assets/new/bindbkg.png')
+		bindcover.Image = getcustomasset('Clae/assets/new/bindbkg.png')
 		bindcover.ScaleType = Enum.ScaleType.Slice
 		bindcover.SliceCenter = Rect.new(0, 0, 141, 40)
 		bindcover.Parent = modulebutton
@@ -3929,18 +3782,17 @@ function mainapi:CreateCategory(categorysettings)
 		bind.Parent = modulebutton
 		local dotsbutton = Instance.new('TextButton')
 		dotsbutton.Name = 'Dots'
-		local dotsBtnW = inputService.TouchEnabled and 44 or 25
-		dotsbutton.Size = UDim2.fromOffset(dotsBtnW, 40)
-		dotsbutton.Position = UDim2.new(1, -dotsBtnW, 0, 0)
+		dotsbutton.Size = UDim2.fromOffset(25, 40)
+		dotsbutton.Position = UDim2.new(1, -25, 0, 0)
 		dotsbutton.BackgroundTransparency = 1
 		dotsbutton.Text = ''
 		dotsbutton.Parent = modulebutton
 		local dots = Instance.new('ImageLabel')
 		dots.Name = 'Dots'
 		dots.Size = UDim2.fromOffset(3, 16)
-		dots.Position = UDim2.new(0.5, -2, 0, 12)
+		dots.Position = UDim2.fromOffset(4, 12)
 		dots.BackgroundTransparency = 1
-		dots.Image = getcustomasset('levi_shakingrass/assets/new/dots.png')
+		dots.Image = getcustomasset('Clae/assets/new/dots.png')
 		dots.ImageColor3 = color.Light(uipallet.Main, 0.37)
 		dots.Parent = dotsbutton
 		modulechildren.Name = modulesettings.Name..'Children'
@@ -3996,7 +3848,7 @@ function mainapi:CreateCategory(categorysettings)
 
 		function moduleapi:Toggle(multiple)
 			if mainapi.ThreadFix then
-				pcall(_setIdentity, 8)
+				setthreadidentity(8)
 			end
 			self.Enabled = not self.Enabled
 			divider.Visible = self.Enabled
@@ -4020,7 +3872,6 @@ function mainapi:CreateCategory(categorysettings)
 
 		for i, v in components do
 			moduleapi['Create'..i] = function(_, optionsettings)
-				if not moduleapi.Options then moduleapi.Options = {} end
 				return v(optionsettings, modulechildren, moduleapi)
 			end
 		end
@@ -4028,13 +3879,13 @@ function mainapi:CreateCategory(categorysettings)
 		bind.MouseEnter:Connect(function()
 			bindtext.Visible = false
 			bindicon.Visible = not bindtext.Visible
-			bindicon.Image = getcustomasset('levi_shakingrass/assets/new/edit.png')
+			bindicon.Image = getcustomasset('Clae/assets/new/edit.png')
 			if not moduleapi.Enabled then bindicon.ImageColor3 = color.Dark(uipallet.Text, 0.16) end
 		end)
 		bind.MouseLeave:Connect(function()
 			bindtext.Visible = #moduleapi.Bind > 0
 			bindicon.Visible = not bindtext.Visible
-			bindicon.Image = getcustomasset('levi_shakingrass/assets/new/bind.png')
+			bindicon.Image = getcustomasset('Clae/assets/new/bind.png')
 			if not moduleapi.Enabled then
 				bindicon.ImageColor3 = color.Dark(uipallet.Text, 0.43)
 			end
@@ -4094,7 +3945,7 @@ function mainapi:CreateCategory(categorysettings)
 				until (tick() - holdtime) > 1 or not heldbutton or not clickgui.Visible
 				if heldbutton and clickgui.Visible then
 					if mainapi.ThreadFix then
-						pcall(_setIdentity, 8)
+						setthreadidentity(8)
 					end
 					clickgui.Visible = false
 					tooltip.Visible = false
@@ -4109,7 +3960,7 @@ function mainapi:CreateCategory(categorysettings)
 					touchconnection = inputService.InputBegan:Connect(function(inputType)
 						if inputType.UserInputType == Enum.UserInputType.Touch then
 							if mainapi.ThreadFix then
-								pcall(_setIdentity, 8)
+								setthreadidentity(8)
 							end
 							createMobileButton(moduleapi, inputType.Position + Vector3.new(0, guiService:GetGuiInset().Y, 0))
 							clickgui.Visible = true
@@ -4130,7 +3981,7 @@ function mainapi:CreateCategory(categorysettings)
 		end
 		windowlist:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
 			if mainapi.ThreadFix then
-				pcall(_setIdentity, 8)
+				setthreadidentity(8)
 			end
 			modulechildren.Size = UDim2.new(1, 0, 0, windowlist.AbsoluteContentSize.Y / scale.Scale)
 		end)
@@ -4177,8 +4028,8 @@ function mainapi:CreateCategory(categorysettings)
 		arrow.ImageColor3 = Color3.fromRGB(140, 140, 140)
 	end)
 	children:GetPropertyChangedSignal('CanvasPosition'):Connect(function()
-		if _setIdentity then
-			pcall(_setIdentity, 8)
+		if self.ThreadFix then
+			setthreadidentity(8)
 		end
 		divider.Visible = children.CanvasPosition.Y > 10 and children.Visible
 	end)
@@ -4188,8 +4039,8 @@ function mainapi:CreateCategory(categorysettings)
 		end
 	end)
 	windowlist:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-		if _setIdentity then
-			pcall(_setIdentity, 8)
+		if self.ThreadFix then
+			setthreadidentity(8)
 		end
 		children.CanvasSize = UDim2.fromOffset(0, windowlist.AbsoluteContentSize.Y / scale.Scale)
 		if categoryapi.Expanded then
@@ -4276,23 +4127,22 @@ function mainapi:CreateOverlay(categorysettings)
 	pin.Position = UDim2.new(1, -47, 0, 12)
 	pin.BackgroundTransparency = 1
 	pin.AutoButtonColor = false
-	pin.Image = getcustomasset('levi_shakingrass/assets/new/pin.png')
+	pin.Image = getcustomasset('Clae/assets/new/pin.png')
 	pin.ImageColor3 = color.Dark(uipallet.Text, 0.43)
 	pin.Parent = window
 	local dotsbutton = Instance.new('TextButton')
 	dotsbutton.Name = 'Dots'
-	local dotsBtnW2 = inputService.TouchEnabled and 44 or 17
-	dotsbutton.Size = UDim2.fromOffset(dotsBtnW2, 40)
-	dotsbutton.Position = UDim2.new(1, -dotsBtnW2, 0, 0)
+	dotsbutton.Size = UDim2.fromOffset(17, 40)
+	dotsbutton.Position = UDim2.new(1, -17, 0, 0)
 	dotsbutton.BackgroundTransparency = 1
 	dotsbutton.Text = ''
 	dotsbutton.Parent = window
 	local dots = Instance.new('ImageLabel')
 	dots.Name = 'Dots'
 	dots.Size = UDim2.fromOffset(3, 16)
-	dots.Position = UDim2.new(0.5, -2, 0, 12)
+	dots.Position = UDim2.fromOffset(4, 12)
 	dots.BackgroundTransparency = 1
-	dots.Image = getcustomasset('levi_shakingrass/assets/new/dots.png')
+	dots.Image = getcustomasset('Clae/assets/new/dots.png')
 	dots.ImageColor3 = color.Light(uipallet.Main, 0.37)
 	dots.Parent = dotsbutton
 	local customchildren = Instance.new('Frame')
@@ -4388,8 +4238,8 @@ function mainapi:CreateOverlay(categorysettings)
 		categoryapi:Expand(true)
 	end)
 	windowlist:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-		if _setIdentity then
-			pcall(_setIdentity, 8)
+		if self.ThreadFix then
+			setthreadidentity(8)
 		end
 		children.CanvasSize = UDim2.fromOffset(0, windowlist.AbsoluteContentSize.Y / scale.Scale)
 		if categoryapi.Expanded then
@@ -4397,8 +4247,7 @@ function mainapi:CreateOverlay(categorysettings)
 		end
 	end)
 	self:Clean(clickgui:GetPropertyChangedSignal('Visible'):Connect(function()
-		if _setIdentity then pcall(_setIdentity, 8) end
-		pcall(function() categoryapi:Update() end)
+		categoryapi:Update()
 	end))
 
 	categoryapi:Update()
@@ -4463,7 +4312,7 @@ function mainapi:CreateCategoryList(categorysettings)
 	arrow.Size = UDim2.fromOffset(9, 4)
 	arrow.Position = UDim2.fromOffset(20, 19)
 	arrow.BackgroundTransparency = 1
-	arrow.Image = getcustomasset('levi_shakingrass/assets/new/expandup.png')
+	arrow.Image = getcustomasset('Clae/assets/new/expandup.png')
 	arrow.ImageColor3 = Color3.fromRGB(140, 140, 140)
 	arrow.Rotation = 180
 	arrow.Parent = arrowbutton
@@ -4482,7 +4331,6 @@ function mainapi:CreateCategoryList(categorysettings)
 	childrentwo.BackgroundTransparency = 1
 	childrentwo.BackgroundColor3 = color.Dark(uipallet.Main, 0.02)
 	childrentwo.Visible = false
-	childrentwo.LayoutOrder = 9999
 	childrentwo.Parent = children
 	local settings = Instance.new('ImageButton')
 	settings.Name = 'Settings'
@@ -4490,7 +4338,7 @@ function mainapi:CreateCategoryList(categorysettings)
 	settings.Position = UDim2.new(1, -52, 0, 13)
 	settings.BackgroundTransparency = 1
 	settings.AutoButtonColor = false
-	settings.Image = getcustomasset('levi_shakingrass/assets/new/customsettings.png')
+	settings.Image = getcustomasset('Clae/assets/new/customsettings.png')
 	settings.ImageColor3 = color.Dark(uipallet.Text, 0.43)
 	settings.Parent = window
 	local divider = Instance.new('Frame')
@@ -4540,7 +4388,7 @@ function mainapi:CreateCategoryList(categorysettings)
 	addbutton.Size = UDim2.fromOffset(16, 16)
 	addbutton.Position = UDim2.new(1, -26, 0, 8)
 	addbutton.BackgroundTransparency = 1
-	addbutton.Image = getcustomasset('levi_shakingrass/assets/new/add.png')
+	addbutton.Image = getcustomasset('Clae/assets/new/add.png')
 	addbutton.ImageColor3 = categorysettings.Color
 	addbutton.ImageTransparency = 0.3
 	addbutton.Parent = addbkg
@@ -4557,8 +4405,8 @@ function mainapi:CreateCategoryList(categorysettings)
 				if ind then
 					if val ~= 'default' then
 						table.remove(mainapi.Profiles, ind)
-						if isfile('levi_shakingrass/profiles/'..val..mainapi.Place..'.txt') and delfile then
-							delfile('levi_shakingrass/profiles/'..val..mainapi.Place..'.txt')
+						if isfile('Clae/profiles/'..val..mainapi.Place..'.txt') and delfile then
+							delfile('Clae/profiles/'..val..mainapi.Place..'.txt')
 						end
 					end
 				else
@@ -4624,7 +4472,7 @@ function mainapi:CreateCategoryList(categorysettings)
 				dots.Size = UDim2.fromOffset(3, 16)
 				dots.Position = UDim2.fromOffset(10, 9)
 				dots.BackgroundTransparency = 1
-				dots.Image = getcustomasset('levi_shakingrass/assets/new/dots.png')
+				dots.Image = getcustomasset('Clae/assets/new/dots.png')
 				dots.ImageColor3 = color.Light(uipallet.Main, 0.37)
 				dots.Parent = dotsbutton
 				local bind = Instance.new('TextButton')
@@ -4645,7 +4493,7 @@ function mainapi:CreateCategoryList(categorysettings)
 				bindicon.Size = UDim2.fromOffset(12, 12)
 				bindicon.Position = UDim2.new(0.5, -6, 0, 5)
 				bindicon.BackgroundTransparency = 1
-				bindicon.Image = getcustomasset('levi_shakingrass/assets/new/bind.png')
+				bindicon.Image = getcustomasset('Clae/assets/new/bind.png')
 				bindicon.ImageColor3 = color.Dark(uipallet.Text, 0.43)
 				bindicon.Parent = bind
 				local bindtext = Instance.new('TextLabel')
@@ -4661,7 +4509,7 @@ function mainapi:CreateCategoryList(categorysettings)
 				bind.MouseEnter:Connect(function()
 					bindtext.Visible = false
 					bindicon.Visible = not bindtext.Visible
-					bindicon.Image = getcustomasset('levi_shakingrass/assets/new/edit.png')
+					bindicon.Image = getcustomasset('Clae/assets/new/edit.png')
 					if v.Name ~= mainapi.Profile then
 						bindicon.ImageColor3 = color.Dark(uipallet.Text, 0.16)
 					end
@@ -4669,7 +4517,7 @@ function mainapi:CreateCategoryList(categorysettings)
 				bind.MouseLeave:Connect(function()
 					bindtext.Visible = #v.Bind > 0
 					bindicon.Visible = not bindtext.Visible
-					bindicon.Image = getcustomasset('levi_shakingrass/assets/new/bind.png')
+					bindicon.Image = getcustomasset('Clae/assets/new/bind.png')
 					if v.Name ~= mainapi.Profile then
 						bindicon.ImageColor3 = color.Dark(uipallet.Text, 0.43)
 					end
@@ -4679,7 +4527,7 @@ function mainapi:CreateCategoryList(categorysettings)
 				bindcover.Size = UDim2.fromOffset(154, 33)
 				bindcover.BackgroundTransparency = 1
 				bindcover.Visible = false
-				bindcover.Image = getcustomasset('levi_shakingrass/assets/new/bindbkg.png')
+				bindcover.Image = getcustomasset('Clae/assets/new/bindbkg.png')
 				bindcover.ScaleType = Enum.ScaleType.Slice
 				bindcover.SliceCenter = Rect.new(0, 0, 141, 40)
 				bindcover.Parent = object
@@ -4803,7 +4651,7 @@ function mainapi:CreateCategoryList(categorysettings)
 				objecttitle.FontFace = uipallet.Font
 				objecttitle.Parent = object
 				if mainapi.ThreadFix then
-					pcall(_setIdentity, 8)
+					setthreadidentity(8)
 				end
 				local close = Instance.new('ImageButton')
 				close.Name = 'Close'
@@ -4812,7 +4660,7 @@ function mainapi:CreateCategoryList(categorysettings)
 				close.BackgroundColor3 = Color3.new(1, 1, 1)
 				close.BackgroundTransparency = 1
 				close.AutoButtonColor = false
-				close.Image = getcustomasset('levi_shakingrass/assets/new/closemini.png')
+				close.Image = getcustomasset('Clae/assets/new/closemini.png')
 				close.ImageColor3 = color.Light(uipallet.Text, 0.2)
 				close.ImageTransparency = 0.5
 				close.Parent = object
@@ -4875,12 +4723,8 @@ function mainapi:CreateCategoryList(categorysettings)
 
 	for i, v in components do
 		categoryapi['Create'..i] = function(self, optionsettings)
-			local target = categorysettings.Profiles and children or childrentwo
-			return v(optionsettings, target, categoryapi)
+			return v(optionsettings, childrentwo, categoryapi)
 		end
-	end
-	if categorysettings.Profiles then
-		settings.Visible = false
 	end
 
 	addbutton.MouseEnter:Connect(function()
@@ -4941,8 +4785,8 @@ function mainapi:CreateCategoryList(categorysettings)
 		end
 	end)
 	windowlist:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-		if _setIdentity then
-			pcall(_setIdentity, 8)
+		if self.ThreadFix then
+			setthreadidentity(8)
 		end
 		children.CanvasSize = UDim2.fromOffset(0, windowlist.AbsoluteContentSize.Y / scale.Scale)
 		if categoryapi.Expanded then
@@ -4950,8 +4794,8 @@ function mainapi:CreateCategoryList(categorysettings)
 		end
 	end)
 	windowlisttwo:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-		if _setIdentity then
-			pcall(_setIdentity, 8)
+		if self.ThreadFix then
+			setthreadidentity(8)
 		end
 		childrentwo.Size = UDim2.fromOffset(220, windowlisttwo.AbsoluteContentSize.Y)
 	end)
@@ -4970,12 +4814,11 @@ function mainapi:CreateCategoryList(categorysettings)
 end
 
 function mainapi:CreateSearch()
-	local xscale = inputService.TouchEnabled and 0.1 or 0.5
 	local searchbkg = Instance.new('Frame')
 	searchbkg.Name = 'Search'
 	searchbkg.Size = UDim2.fromOffset(220, 37)
-	searchbkg.Position = UDim2.new(xscale, 0, 0, 13)
-	searchbkg.AnchorPoint = Vector2.new(xscale, 0)
+	searchbkg.Position = UDim2.new(0.5, 0, 0, 13)
+	searchbkg.AnchorPoint = Vector2.new(0.5, 0)
 	searchbkg.BackgroundColor3 = color.Dark(uipallet.Main, 0.02)
 	searchbkg.Parent = clickgui
 	local searchicon = Instance.new('ImageLabel')
@@ -4983,7 +4826,7 @@ function mainapi:CreateSearch()
 	searchicon.Size = UDim2.fromOffset(14, 14)
 	searchicon.Position = UDim2.new(1, -23, 0, 11)
 	searchicon.BackgroundTransparency = 1
-	searchicon.Image = getcustomasset('levi_shakingrass/assets/new/search.png')
+	searchicon.Image = getcustomasset('Clae/assets/new/search.png')
 	searchicon.ImageColor3 = color.Light(uipallet.Main, 0.37)
 	searchicon.Parent = searchbkg
 	local legiticon = Instance.new('ImageButton')
@@ -4991,7 +4834,7 @@ function mainapi:CreateSearch()
 	legiticon.Size = UDim2.fromOffset(29, 16)
 	legiticon.Position = UDim2.fromOffset(8, 11)
 	legiticon.BackgroundTransparency = 1
-	legiticon.Image = getcustomasset('levi_shakingrass/assets/new/legit.png')
+	legiticon.Image = getcustomasset('Clae/assets/new/legit.png')
 	legiticon.Parent = searchbkg
 	local legitdivider = Instance.new('Frame')
 	legitdivider.Name = 'LegitDivider'
@@ -5095,8 +4938,8 @@ function mainapi:CreateSearch()
 		end
 	end)
 	windowlist:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-		if _setIdentity then
-			pcall(_setIdentity, 8)
+		if self.ThreadFix then
+			setthreadidentity(8)
 		end
 		children.CanvasSize = UDim2.fromOffset(0, windowlist.AbsoluteContentSize.Y / scale.Scale)
 		searchbkg.Size = UDim2.fromOffset(220, math.min(37 + windowlist.AbsoluteContentSize.Y / scale.Scale, 437))
@@ -5106,7 +4949,7 @@ function mainapi:CreateSearch()
 end
 
 function mainapi:CreateLegit()
-	local legitapi = {Modules = {}, Categories = {}}
+	local legitapi = {Modules = {}}
 
 	local window = Instance.new('Frame')
 	window.Name = 'LegitGUI'
@@ -5128,14 +4971,14 @@ function mainapi:CreateLegit()
 	icon.Size = UDim2.fromOffset(16, 16)
 	icon.Position = UDim2.fromOffset(18, 13)
 	icon.BackgroundTransparency = 1
-	icon.Image = getcustomasset('levi_shakingrass/assets/new/legittab.png')
+	icon.Image = getcustomasset('Clae/assets/new/legittab.png')
 	icon.ImageColor3 = uipallet.Text
 	icon.Parent = window
 	local close = addCloseButton(window)
 	local children = Instance.new('ScrollingFrame')
 	children.Name = 'Children'
-	children.Size = UDim2.fromOffset(684, 300)
-	children.Position = UDim2.fromOffset(14, 80)
+	children.Size = UDim2.fromOffset(684, 340)
+	children.Position = UDim2.fromOffset(14, 41)
 	children.BackgroundTransparency = 1
 	children.BorderSizePixel = 0
 	children.ScrollBarThickness = 2
@@ -5148,124 +4991,13 @@ function mainapi:CreateLegit()
 	windowlist.CellSize = UDim2.fromOffset(163, 114)
 	windowlist.CellPadding = UDim2.fromOffset(6, 5)
 	windowlist.Parent = children
-	local search = Instance.new('Frame')
-	search.Position = UDim2.fromOffset(449, 42)
-	search.Name = 'Search'
-	search.Size = UDim2.fromOffset(240, 31)
-	search.BackgroundColor3 = color.Light(uipallet.Main, 0.02)
-	search.Parent = window
-	addCorner(search, UDim.new(0, 5))
-	local searchbox = search:Clone()
-	searchbox.Size = UDim2.new(1, -2, 1, -2)
-	searchbox.Position = UDim2.fromOffset(1, 1)
-	searchbox.BackgroundColor3 = color.Dark(uipallet.Main, 0.02)
-	searchbox.Parent = search
-	local searchvalue = Instance.new('TextBox')
-	searchvalue.Size = UDim2.new(1, -35, 1, 0)
-	searchvalue.Position = UDim2.fromOffset(10, 0)
-	searchvalue.BackgroundTransparency = 1
-	searchvalue.Text = ''
-	searchvalue.PlaceholderText = 'Search mods'
-	searchvalue.TextXAlignment = Enum.TextXAlignment.Left
-	searchvalue.PlaceholderColor3 = color.Dark(uipallet.Text, 0.11)
-	searchvalue.TextColor3 = color.Dark(uipallet.Text, 0.11)
-	searchvalue.TextSize = 14
-	searchvalue.FontFace = uipallet.Font
-	searchvalue.ClearTextOnFocus = false
-	searchvalue.Parent = search
-	local searchicon = Instance.new('ImageLabel')
-	searchicon.BackgroundTransparency = 1
-	searchicon.Position = UDim2.new(1, -28, 0, 8)
-	searchicon.Size = UDim2.fromOffset(12, 12)
-	searchicon.Image = getcustomasset('levi_shakingrass/assets/new/search.png')
-	searchicon.ImageColor3 = color.Light(uipallet.Main, 0.37)
-	searchicon.Parent = searchbox
-	local categorylist = Instance.new('Frame')
-	categorylist.BackgroundTransparency = 1
-	categorylist.Position = UDim2.fromOffset(22, 42)
-	categorylist.Size = UDim2.fromOffset(1, 31)
-	categorylist.Parent = window
-	local categorylayout = Instance.new('UIListLayout')
-	categorylayout.FillDirection = Enum.FillDirection.Horizontal
-	categorylayout.Parent = categorylist
-	categorylayout.SortOrder = Enum.SortOrder.LayoutOrder
-	local categoryhighlight = Instance.new('Frame')
-	categoryhighlight.BackgroundColor3 = color.Dark(uipallet.Text, 0.31)
-	categoryhighlight.BorderSizePixel = 0
-	categoryhighlight.Position = UDim2.fromOffset(0, 23)
-	categoryhighlight.Size = UDim2.new()
 	legitapi.Window = window
 	table.insert(mainapi.Windows, window)
-	
-	local function updateCheck()
-		local FocusedCategory = ''
-		for _, v in legitapi.Categories do
-			if v.Focused then
-				FocusedCategory = v.Name
-				break
-			end
-		end
-		for i, v in legitapi.Modules do
-			v.Object.Visible = (FocusedCategory == 'All' or v.ApiCategory == FocusedCategory) and (i == '' or i:lower():gsub(' ', ''):find(searchvalue.Text:lower():gsub(' ', '')) and true) or false
-		end
-	end
-
-	function legitapi:CreateCategory(categoryname)
-		local category = {
-			Name = categoryname,
-			Focused = #self.Categories <= 0 and true or false
-		}
-
-		local children = Instance.new('TextButton')
-		children.Name = category.Name
-		children.LayoutOrder = #self.Categories + 1
-		children.BackgroundTransparency = 1
-		children.Size = UDim2.new(0, 80, 1, 0)
-		children.FontFace = uipallet.Font
-		children.TextColor3 = color.Dark(uipallet.Text, 0.31)
-		children.Text = category.Name
-		children.TextSize = 14
-		children.TextXAlignment = Enum.TextXAlignment.Left
-		children.Parent = categorylist
-		children.MouseButton1Click:Connect(function()
-			category:SetVisible()
-		end)
-		
-		local sizex = textService:GetTextSize(children.Text, children.TextSize, children.Font, Vector2.new(1000, 1000)).X
-		children.Size = UDim2.new(0, sizex + 30, 1, 0)
-
-		function category:SetVisible(focused)
-			focused = focused or focused == nil and true
-			children.TextColor3 = focused and color.Light(uipallet.Text, 0.2) or color.Dark(uipallet.Text, 0.31)
-			categoryhighlight.Parent = focused and children or categoryhighlight.Parent
-			categoryhighlight.Size = focused and UDim2.fromOffset(sizex, 1) or categoryhighlight.Size
-			category.Focused = focused
-
-			if focused then
-				for _, v in legitapi.Categories do
-					if v.Name ~= category.Name and v.Focused then
-						v:SetVisible(false)
-					end
-				end
-				updateCheck()
-			end
-		end
-
-		if category.Focused then
-			category:SetVisible(true)
-			updateCheck()
-		end
-
-		category.Window = children
-		table.insert(legitapi.Categories, category)
-		return category
-	end
 
 	function legitapi:CreateModule(modulesettings)
 		mainapi:Remove(modulesettings.Name)
 		local moduleapi = {
 			Enabled = false,
-			ApiCategory = modulesettings.Category or 'Game',
 			Options = {},
 			Name = modulesettings.Name,
 			Legit = true
@@ -5314,7 +5046,7 @@ function mainapi:CreateLegit()
 		dots.Size = UDim2.fromOffset(2, 12)
 		dots.Position = UDim2.fromOffset(6, 6)
 		dots.BackgroundTransparency = 1
-		dots.Image = getcustomasset('levi_shakingrass/assets/new/dots.png')
+		dots.Image = getcustomasset('Clae/assets/new/dots.png')
 		dots.ImageColor3 = color.Light(uipallet.Main, 0.37)
 		dots.Parent = dotsbutton
 		local shadow = Instance.new('TextButton')
@@ -5351,7 +5083,7 @@ function mainapi:CreateLegit()
 		back.Size = UDim2.fromOffset(16, 16)
 		back.Position = UDim2.fromOffset(11, 13)
 		back.BackgroundTransparency = 1
-		back.Image = getcustomasset('levi_shakingrass/assets/new/back.png')
+		back.Image = getcustomasset('Clae/assets/new/back.png')
 		back.ImageColor3 = color.Light(uipallet.Main, 0.37)
 		back.Parent = settingspane
 		addCorner(settingspane)
@@ -5473,7 +5205,7 @@ function mainapi:CreateLegit()
 		end)
 		settingswindowlist:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
 			if mainapi.ThreadFix then
-				pcall(_setIdentity, 8)
+				setthreadidentity(8)
 			end
 			settingschildren.CanvasSize = UDim2.fromOffset(0, settingswindowlist.AbsoluteContentSize.Y / scale.Scale)
 		end)
@@ -5499,7 +5231,6 @@ function mainapi:CreateLegit()
 
 		return moduleapi
 	end
-	mainapi:Clean(searchvalue:GetPropertyChangedSignal('Text'):Connect(updateCheck))
 
 	local function visibleCheck()
 		for _, v in legitapi.Modules do
@@ -5517,62 +5248,28 @@ function mainapi:CreateLegit()
 		window.Visible = false
 		clickgui.Visible = true
 	end)
-	self:Clean(clickgui:GetPropertyChangedSignal('Visible'):Connect(function()
-		if _setIdentity then pcall(_setIdentity, 8) end
-		pcall(visibleCheck)
-	end))
+	self:Clean(clickgui:GetPropertyChangedSignal('Visible'):Connect(visibleCheck))
 	window:GetPropertyChangedSignal('Visible'):Connect(function()
-		if _setIdentity then pcall(_setIdentity, 8) end
-		pcall(function()
-			self:UpdateGUI(self.GUIColor.Hue, self.GUIColor.Sat, self.GUIColor.Value)
-			visibleCheck()
-		end)
+		self:UpdateGUI(self.GUIColor.Hue, self.GUIColor.Sat, self.GUIColor.Value)
+		visibleCheck()
 	end)
 	windowlist:GetPropertyChangedSignal('AbsoluteContentSize'):Connect(function()
-		if _setIdentity then
-			pcall(_setIdentity, 8)
+		if self.ThreadFix then
+			setthreadidentity(8)
 		end
 		children.CanvasSize = UDim2.fromOffset(0, windowlist.AbsoluteContentSize.Y / scale.Scale)
 	end)
 
 	self.Legit = legitapi
 
-	legitapi:CreateCategory('All')
-	legitapi:CreateCategory('Hud')
-	legitapi:CreateCategory('Game')
-
 	return legitapi
 end
 
 function mainapi:CreateNotification(title, text, duration, type)
 	if not self.Notifications.Enabled then return end
-	local color = type == 'alert' and Color3.fromRGB(250, 50, 56) or type == 'warning' and Color3.fromRGB(236, 129, 43) or Color3.fromRGB(220, 220, 220)
-	if license.Closet or license.Webhook then
-		if license.Webhook then
-			request({
-				Url = license.Webhook,
-				Method = 'POST',
-				Headers = {
-					['Content-Type'] = 'application/json'
-				},
-				Body = httpService:JSONEncode({
-					content = '',
-					embeds = {{
-						title = title or "Vape",
-						description = removeTags(text or "None"),
-						color = tonumber(color:ToHex(), 16),
-						timestamp = os.date('%Y-%m-%dT%X.000Z'),
-						fields = {}
-					}},
-					components = {}
-				})
-			})
-		end
-		return
-	end
 	task.delay(0, function()
-		if _setIdentity then
-			pcall(_setIdentity, 8)
+		if self.ThreadFix then
+			setthreadidentity(8)
 		end
 		local i = #notifications:GetChildren() + 1
 		local notification = Instance.new('ImageLabel')
@@ -5581,7 +5278,7 @@ function mainapi:CreateNotification(title, text, duration, type)
 		notification.Position = UDim2.new(1, 0, 1, -(29 + (78 * i)))
 		notification.ZIndex = 5
 		notification.BackgroundTransparency = 1
-		notification.Image = getcustomasset('levi_shakingrass/assets/new/notification.png')
+		notification.Image = getcustomasset('Clae/assets/new/notification.png')
 		notification.ScaleType = Enum.ScaleType.Slice
 		notification.SliceCenter = Rect.new(7, 7, 9, 9)
 		notification.Parent = notifications
@@ -5592,7 +5289,7 @@ function mainapi:CreateNotification(title, text, duration, type)
 		iconshadow.Position = UDim2.fromOffset(-5, -8)
 		iconshadow.ZIndex = 5
 		iconshadow.BackgroundTransparency = 1
-		iconshadow.Image = getcustomasset('levi_shakingrass/assets/new/'..(type or 'info')..'.png')
+		iconshadow.Image = getcustomasset('Clae/assets/new/'..(type or 'info')..'.png')
 		iconshadow.ImageColor3 = Color3.new()
 		iconshadow.ImageTransparency = 0.5
 		iconshadow.Parent = notification
@@ -5637,7 +5334,9 @@ function mainapi:CreateNotification(title, text, duration, type)
 		progress.Position = UDim2.new(0, 3, 1, -4)
 		progress.ZIndex = 5
 		progress.BackgroundColor3 =
-			color
+			type == 'alert' and Color3.fromRGB(250, 50, 56)
+			or type == 'warning' and Color3.fromRGB(236, 129, 43)
+			or Color3.fromRGB(220, 220, 220)
 		progress.BorderSizePixel = 0
 		progress.Parent = notification
 		if tween.Tween then
@@ -5661,23 +5360,18 @@ function mainapi:CreateNotification(title, text, duration, type)
 	end)
 end
 
-local guipane
 function mainapi:Load(skipgui, profile)
-	if _setIdentity then
-		pcall(_setIdentity, 8)
-	end
 	if not skipgui then
 		self.GUIColor:SetValue(nil, nil, nil, 4)
 	end
 	local guidata = {}
 	local savecheck = true
 
-	if isfile('levi_shakingrass/profiles/'..game.GameId..'.gui.txt') then
-		guidata = loadJson('levi_shakingrass/profiles/'..game.GameId..'.gui.txt')
+	if isfile('Clae/profiles/'..game.GameId..'.gui.txt') then
+		guidata = loadJson('Clae/profiles/'..game.GameId..'.gui.txt')
 		if not guidata then
 			guidata = {Categories = {}}
-			self:CreateNotification('Vape', 'Failed to load GUI settings, Try rejoining ur game', 10, 'alert')
-			delfile('levi_shakingrass/profiles/'..game.GameId..'.gui.txt')
+			self:CreateNotification('Vape', 'Failed to load GUI settings.', 10, 'alert')
 			savecheck = false
 		end
 
@@ -5720,8 +5414,8 @@ function mainapi:Load(skipgui, profile)
 		self.ProfileLabel.Size = UDim2.fromOffset(getfontsize(self.ProfileLabel.Text, self.ProfileLabel.TextSize, self.ProfileLabel.Font).X + 16, 24)
 	end
 
-	if isfile('levi_shakingrass/profiles/'..self.Profile..self.Place..'.txt') then
-		local savedata = loadJson('levi_shakingrass/profiles/'..self.Profile..self.Place..'.txt')
+	if isfile('Clae/profiles/'..self.Profile..self.Place..'.txt') then
+		local savedata = loadJson('Clae/profiles/'..self.Profile..self.Place..'.txt')
 		if not savedata then
 			savedata = {Categories = {}, Modules = {}, Legit = {}}
 			self:CreateNotification('Vape', 'Failed to load '..self.Profile..' profile.', 10, 'alert')
@@ -5793,39 +5487,26 @@ function mainapi:Load(skipgui, profile)
 	self.Loaded = savecheck
 	self.Categories.Main.Options.Bind:SetBind(self.Keybind)
 
-	if inputService.TouchEnabled or not inputService.KeyboardEnabled or shared.VapeDeveloper then
-		local hide = isfile('levi_shakingrass/profiles/hide.txt') and readfile('levi_shakingrass/profiles/hide.txt') or nil
-		if hide ~= nil then
-			hide = hide == 'true' and true or false
-		end
+	if inputService.TouchEnabled and #self.Keybind == 1 and self.Keybind[1] == 'RightShift' then
 		local button = Instance.new('TextButton')
-		button.LayoutOrder = -1
 		button.Size = UDim2.fromOffset(32, 32)
 		button.Position = UDim2.new(1, -90, 0, 4)
-		button.BackgroundColor3 = Color3.new(1, 1, 1)
-		button.BackgroundTransparency = hide and 1 or 0
+		button.BackgroundColor3 = Color3.new()
+		button.BackgroundTransparency = 0.5
 		button.Text = ''
-		do
-			local topBar = game.GameId == 2619619496 and cloneref(game:GetService('Players')).LocalPlayer.PlayerGui:FindFirstChild('TopBarAppGui')
-			button.Parent = (topBar and topBar:FindFirstChild('TopBarApp')) or gui
-		end
+		button.Parent = gui
 		local image = Instance.new('ImageLabel')
-		image.AnchorPoint = Vector2.new(0.5, 0.5)
-		image.Size = UDim2.fromOffset(28, 28)
-		image.Position = UDim2.fromScale(0.5, 0.5)
+		image.Size = UDim2.fromOffset(26, 26)
+		image.Position = UDim2.fromOffset(3, 3)
 		image.BackgroundTransparency = 1
-		image.ScaleType = Enum.ScaleType.Fit
-		image.ImageColor3 = Color3.fromRGB(50, 160, 255)
-		image.Image = getcustomasset('levi_shakingrass/assets/new/levibutton.png')
-		image.ImageTransparency = hide and 1 or 0
+		image.Image = getcustomasset('Clae/assets/new/vape.png')
 		image.Parent = button
 		local buttoncorner = Instance.new('UICorner')
 		buttoncorner.Parent = button
 		self.VapeButton = button
-		mainapi:Clean(button)
 		button.MouseButton1Click:Connect(function()
-			if _setIdentity then
-				pcall(_setIdentity, 8)
+			if self.ThreadFix then
+				setthreadidentity(8)
 			end
 			for _, v in self.Windows do
 				v.Visible = false
@@ -5839,18 +5520,6 @@ function mainapi:Load(skipgui, profile)
 			tooltip.Visible = false
 			self:BlurCheck()
 		end)
-
-		if guipane then
-			guipane:CreateToggle({
-				Name = 'Hide levi button',
-				Default = hide or false,
-				Function = function(call)
-					button.BackgroundTransparency = call and 1 or 0.35
-					image.ImageTransparency = call and 1 or 0
-					writefile('levi_shakingrass/profiles/hide.txt', tostring(call))
-				end
-			})
-		end
 	end
 end
 
@@ -5866,8 +5535,8 @@ function mainapi:Remove(obj)
 	local tab = (self.Modules[obj] and self.Modules or self.Legit.Modules[obj] and self.Legit.Modules or self.Categories)
 	if tab and tab[obj] then
 		local newobj = tab[obj]
-		if _setIdentity then
-			pcall(_setIdentity, 8)
+		if self.ThreadFix then
+			setthreadidentity(8)
 		end
 
 		for _, v in {'Object', 'Children', 'Toggle', 'Button'} do
@@ -5925,8 +5594,8 @@ function mainapi:Save(newprofile)
 		}
 	end
 
-	writefile('levi_shakingrass/profiles/'..game.GameId..'.gui.txt', httpService:JSONEncode(guidata))
-	writefile('levi_shakingrass/profiles/'..self.Profile..self.Place..'.txt', httpService:JSONEncode(savedata))
+	writefile('Clae/profiles/'..game.GameId..'.gui.txt', httpService:JSONEncode(guidata))
+	writefile('Clae/profiles/'..self.Profile..self.Place..'.txt', httpService:JSONEncode(savedata))
 end
 
 function mainapi:SaveOptions(object, savedoptions)
@@ -5963,7 +5632,7 @@ function mainapi:Uninject()
 		end)
 	end
 	if mainapi.ThreadFix then
-		pcall(_setIdentity, 8)
+		setthreadidentity(8)
 		clickgui.Visible = false
 		mainapi:BlurCheck()
 	end
@@ -5982,10 +5651,11 @@ gui.DisplayOrder = 9999999
 gui.ZIndexBehavior = Enum.ZIndexBehavior.Global
 gui.IgnoreGuiInset = true
 gui.OnTopOfCoreBlur = true
-if gethui then
-	gui.Parent = gethui()
+if mainapi.ThreadFix then
+	gui.Parent = cloneref(game:GetService('CoreGui'))--(gethui and gethui()) or cloneref(game:GetService('CoreGui'))
 else
-	gui.Parent = cloneref(game:GetService('CoreGui'))
+	gui.Parent = cloneref(game:GetService('Players')).LocalPlayer.PlayerGui
+	gui.ResetOnSpawn = false
 end
 mainapi.gui = gui
 scaledgui = Instance.new('Frame')
@@ -6003,7 +5673,7 @@ local scarcitybanner = Instance.new('TextLabel')
 scarcitybanner.Size = UDim2.fromScale(1, 0.02)
 scarcitybanner.Position = UDim2.fromScale(0, 0.97)
 scarcitybanner.BackgroundTransparency = 1
-scarcitybanner.Text = 'Welcome to levi_shakingrass. Stay sharp.'
+scarcitybanner.Text = 'A new discord has been created, click the discord icon to join.'
 scarcitybanner.TextScaled = true
 scarcitybanner.TextColor3 = Color3.new(1, 1, 1)
 scarcitybanner.TextStrokeTransparency = 0.5
@@ -6069,77 +5739,71 @@ mainapi:Clean(scale:GetPropertyChangedSignal('Scale'):Connect(function()
 end))
 
 mainapi:Clean(clickgui:GetPropertyChangedSignal('Visible'):Connect(function()
-	if _setIdentity then pcall(_setIdentity, 8) end
-	pcall(function()
-		mainapi:UpdateGUI(mainapi.GUIColor.Hue, mainapi.GUIColor.Sat, mainapi.GUIColor.Value, true)
-		if clickgui.Visible and inputService.MouseEnabled then
-			repeat
-				local visibleCheck = clickgui.Visible
-				for _, v in mainapi.Windows do
-					visibleCheck = visibleCheck or v.Visible
-				end
-				if not visibleCheck then break end
+	mainapi:UpdateGUI(mainapi.GUIColor.Hue, mainapi.GUIColor.Sat, mainapi.GUIColor.Value, true)
+	if clickgui.Visible and inputService.MouseEnabled then
+		repeat
+			local visibleCheck = clickgui.Visible
+			for _, v in mainapi.Windows do
+				visibleCheck = visibleCheck or v.Visible
+			end
+			if not visibleCheck then break end
 
-				cursor.Visible = not inputService.MouseIconEnabled
-				if cursor.Visible then
-					local mouseLocation = inputService:GetMouseLocation()
-					cursor.Position = UDim2.fromOffset(mouseLocation.X - 31, mouseLocation.Y - 32)
-				end
+			cursor.Visible = not inputService.MouseIconEnabled
+			if cursor.Visible then
+				local mouseLocation = inputService:GetMouseLocation()
+				cursor.Position = UDim2.fromOffset(mouseLocation.X - 31, mouseLocation.Y - 32)
+			end
 
-				task.wait()
-			until mainapi.Loaded == nil
-			cursor.Visible = false
-		end
-	end)
+			task.wait()
+		until mainapi.Loaded == nil
+		cursor.Visible = false
+	end
 end))
 
 mainapi:CreateGUI()
 mainapi.Categories.Main:CreateDivider()
 mainapi:CreateCategory({
 	Name = 'Combat',
-	Icon = getcustomasset('levi_shakingrass/assets/new/combaticon.png'),
+	Icon = getcustomasset('Clae/assets/new/combaticon.png'),
 	Size = UDim2.fromOffset(13, 14)
 })
 mainapi:CreateCategory({
 	Name = 'Blatant',
-	Icon = getcustomasset('levi_shakingrass/assets/new/blatanticon.png'),
+	Icon = getcustomasset('Clae/assets/new/blatanticon.png'),
 	Size = UDim2.fromOffset(14, 14)
 })
 mainapi:CreateCategory({
 	Name = 'Render',
-	Icon = getcustomasset('levi_shakingrass/assets/new/rendericon.png'),
+	Icon = getcustomasset('Clae/assets/new/rendericon.png'),
 	Size = UDim2.fromOffset(15, 14)
 })
 mainapi:CreateCategory({
 	Name = 'Utility',
-	Icon = getcustomasset('levi_shakingrass/assets/new/utilityicon.png'),
+	Icon = getcustomasset('Clae/assets/new/utilityicon.png'),
 	Size = UDim2.fromOffset(15, 14)
 })
 mainapi:CreateCategory({
 	Name = 'World',
-	Icon = getcustomasset('levi_shakingrass/assets/new/worldicon.png'),
+	Icon = getcustomasset('Clae/assets/new/worldicon.png'),
 	Size = UDim2.fromOffset(14, 14)
 })
 mainapi:CreateCategory({
 	Name = 'Inventory',
-	Icon = getcustomasset('levi_shakingrass/assets/new/inventoryicon.png'),
+	Icon = getcustomasset('Clae/assets/new/inventoryicon.png'),
 	Size = UDim2.fromOffset(15, 14)
 })
 mainapi:CreateCategory({
 	Name = 'Minigames',
-	Icon = getcustomasset('levi_shakingrass/assets/new/miniicon.png'),
+	Icon = getcustomasset('Clae/assets/new/miniicon.png'),
 	Size = UDim2.fromOffset(19, 12)
 })
-if game.GameId == 2619619496 then
-	mainapi:CreateCategory({
-		Name = 'Kits',
-		Icon = getcustomasset('levi_shakingrass/assets/new/friendstab.png'),
-		Size = UDim2.fromOffset(15, 15)
-	})
-end
-
 mainapi.Categories.Main:CreateDivider('misc')
 
+mainapi:CreateCategory({
+    Name = 'Kits',
+    Icon = getcustomasset('Clae/assets/new/miniicon.png'),
+    Size = UDim2.fromOffset(19, 12)
+})
 --[[
 	Friends
 ]]
@@ -6151,7 +5815,7 @@ local friendscolor = {
 }
 local friendssettings = {
 	Name = 'Friends',
-	Icon = getcustomasset('levi_shakingrass/assets/new/friendstab.png'),
+	Icon = getcustomasset('Clae/assets/new/friendstab.png'),
 	Size = UDim2.fromOffset(17, 16),
 	Placeholder = 'Roblox username',
 	Color = Color3.fromRGB(5, 134, 105),
@@ -6202,35 +5866,13 @@ mainapi:Clean(friends.ColorUpdate)
 --[[
 	Profiles
 ]]
-local profiles = mainapi:CreateCategoryList({
+mainapi:CreateCategoryList({
 	Name = 'Profiles',
-	Icon = getcustomasset('levi_shakingrass/assets/new/profilesicon.png'),
+	Icon = getcustomasset('Clae/assets/new/profilesicon.png'),
 	Size = UDim2.fromOffset(17, 10),
 	Position = UDim2.fromOffset(12, 16),
 	Placeholder = 'Type name',
 	Profiles = true
-})
-local json = profiles:CreateTextBox({
-	Name = 'JSON Config',
-	Placeholder = '[]',
-	Height = 90
-})
-profiles:CreateButton({
-	Name = 'Import json',
-	Height = 44,
-	Function = function()
-		local success, result = pcall(function()
-			return httpService:JSONDecode(json.Value)
-		end)
-		if success and result then
-			local awesome = `imported ({#mainapi.Profiles + 1})`
-			table.insert(mainapi.Profiles, {Name = awesome, Bind = {}})
-			mainapi:Save(awesome)
-			writefile('levi_shakingrass/profiles/'..awesome..mainapi.Place..'.txt', result.config)
-			writefile('levi_shakingrass/profiles/'..game.GameId..'.gui.txt', result.gui)
-			mainapi:Load(true, awesome)
-		end
-	end
 })
 
 --[[
@@ -6239,7 +5881,7 @@ profiles:CreateButton({
 local targets
 targets = mainapi:CreateCategoryList({
 	Name = 'Targets',
-	Icon = getcustomasset('levi_shakingrass/assets/new/friendstab.png'),
+	Icon = getcustomasset('Clae/assets/new/friendstab.png'),
 	Size = UDim2.fromOffset(17, 16),
 	Placeholder = 'Roblox username',
 	Function = function()
@@ -6267,32 +5909,17 @@ general:CreateButton({
 	Name = 'Reset current profile',
 	Function = function()
 	mainapi.Save = function() end
-		if isfile('levi_shakingrass/profiles/'..mainapi.Profile..mainapi.Place..'.txt') and delfile then
-			delfile('levi_shakingrass/profiles/'..mainapi.Profile..mainapi.Place..'.txt')
+		if isfile('Clae/profiles/'..mainapi.Profile..mainapi.Place..'.txt') and delfile then
+			delfile('Clae/profiles/'..mainapi.Profile..mainapi.Place..'.txt')
 		end
 		shared.vapereload = true
 		if shared.VapeDeveloper then
-			loadstring(readfile('levi_shakingrass/loader.lua'), 'loader')()
+			loadstring(readfile('Clae/loader.lua'), 'loader')()
 		else
-			loadstring(game:HttpGet('https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/'..readfile('levi_shakingrass/profiles/commit.txt')..'/loader.lua', true))()
+			loadstring(game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'..readfile('Clae/profiles/commit.txt')..'/loader.lua', true))()
 		end
 	end,
 	Tooltip = 'This will set your profile to the default settings of Vape'
-})
-general:CreateButton({
-	Name = 'Export to JSON',
-	Function = function()
-		local tab = {}
-		if isfile('levi_shakingrass/profiles/'..mainapi.Profile..mainapi.Place..'.txt') then
-			tab.config = readfile('levi_shakingrass/profiles/'..mainapi.Profile..mainapi.Place..'.txt')
-		end
-		if isfile('levi_shakingrass/profiles/'..game.GameId..'.gui.txt') then
-			tab.gui = readfile('levi_shakingrass/profiles/'..game.GameId..'.gui.txt')
-		end
-		tab.game = tostring(mainapi.Place or 'universal'.. game.PlaceId)
-		setclipboard(httpService:JSONEncode(tab))
-	end,
-	Tooltip = 'Converts ur config to json format'
 })
 general:CreateButton({
 	Name = 'Self destruct',
@@ -6306,9 +5933,9 @@ general:CreateButton({
 	Function = function()
 		shared.vapereload = true
 		if shared.VapeDeveloper then
-			loadstring(readfile('levi_shakingrass/loader.lua'), 'loader')()
+			loadstring(readfile('Clae/loader.lua'), 'loader')()
 		else
-			loadstring(game:HttpGet('https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/'..readfile('levi_shakingrass/profiles/commit.txt')..'/loader.lua', true))()
+			loadstring(game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'..readfile('Clae/profiles/commit.txt')..'/loader.lua', true))()
 		end
 	end,
 	Tooltip = 'Reloads vape for debugging purposes'
@@ -6344,7 +5971,7 @@ modules:CreateToggle({
 	GUI Settings
 ]]
 
-guipane = mainapi.Categories.Main:CreateSettingsPane({Name = 'GUI'})
+local guipane = mainapi.Categories.Main:CreateSettingsPane({Name = 'GUI'})
 mainapi.Blur = guipane:CreateToggle({
 	Name = 'Blur background',
 	Function = function()
@@ -6357,15 +5984,6 @@ guipane:CreateToggle({
 	Name = 'GUI bind indicator',
 	Default = true,
 	Tooltip = "Displays a message indicating your GUI upon injecting.\nI.E. 'Press RSHIFT to open GUI'"
-})
-guipane:CreateToggle({
-	Name = 'No module spacing',
-	Tooltip = 'Removes module\'s text spacing',
-	Function = function(callback)
-		for _, v in mainapi.Modules do
-			v.Object.Text = '            '..(callback and v.Name:gsub(' ', '') or v.Name)
-		end
-	end
 })
 guipane:CreateToggle({
 	Name = 'Show tooltips',
@@ -6394,7 +6012,7 @@ mainapi.Scale = guipane:CreateToggle({
 	Function = function(callback)
 		scaleslider.Object.Visible = not callback
 		if callback then
-			scale.Scale = math.max(gui.AbsoluteSize.X / 1920, 0.45)
+			scale.Scale = math.max(gui.AbsoluteSize.X / 1920, 0.6)
 		else
 			scale.Scale = scaleslider.Value
 		end
@@ -6420,22 +6038,16 @@ guipane:CreateDropdown({
 	List = inputService.TouchEnabled and {'new', 'old'} or {'new', 'old', 'rise'},
 	Function = function(val, mouse)
 		if mouse then
-			writefile('levi_shakingrass/profiles/gui.txt', val)
+			writefile('Clae/profiles/gui.txt', val)
 			shared.vapereload = true
 			if shared.VapeDeveloper then
-				loadstring(readfile('levi_shakingrass/loader.lua'), 'loader')()
+				loadstring(readfile('Clae/loader.lua'), 'loader')()
 			else
-				loadstring(game:HttpGet('https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/'..readfile('levi_shakingrass/profiles/commit.txt')..'/loader.lua', true))()
+				loadstring(game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'..readfile('Clae/profiles/commit.txt')..'/loader.lua', true))()
 			end
 		end
 	end,
 	Tooltip = 'new - The newest vape theme to since v4.05\nold - The vape theme pre v4.05\nrise - Rise 6.0'
-})
-mainapi.ToggleMode = guipane:CreateDropdown({
-	Name = 'Keybind mode',
-	List = {'Toggle', 'Held'},
-	Tooltip = 'Toggle - Keybind always activates when input starts or end\nHeld - Activates when input starts, Deactivate when input ends',
-	Default = 'Toggle'
 })
 mainapi.RainbowMode = guipane:CreateDropdown({
 	Name = 'Rainbow Mode',
@@ -6458,23 +6070,6 @@ mainapi.RainbowUpdateSpeed = guipane:CreateSlider({
 	Tooltip = 'Adjusts the update rate of rainbow values',
 	Suffix = 'hz'
 })
-if inputService.TouchEnabled then
-	guipane:CreateSlider({
-		Name = 'Button size',
-		Min = 20,
-		Max = 80,
-		Default = 40,
-		Tooltip = 'Size of the shortcut buttons placed on screen',
-		Function = function(val)
-			mobileButtonSize.Value = val
-			for _, mod in mainapi.Modules do
-				if mod.Bind and mod.Bind.Button then
-					mod.Bind.Button.Size = UDim2.fromOffset(val, val)
-				end
-			end
-		end
-	})
-end
 guipane:CreateButton({
 	Name = 'Reset GUI positions',
 	Function = function()
@@ -6556,7 +6151,7 @@ mainapi.Categories.Main:CreateBind()
 
 local textgui = mainapi:CreateOverlay({
 	Name = 'Text GUI',
-	Icon = getcustomasset('levi_shakingrass/assets/new/textguiicon.png'),
+	Icon = getcustomasset('Clae/assets/new/textguiicon.png'),
 	Size = UDim2.fromOffset(16, 12),
 	Position = UDim2.fromOffset(12, 14),
 	Function = function()
@@ -6690,8 +6285,8 @@ local textguimodules = textgui:CreateToggle({
 textguimoduleslist = textgui:CreateTextList({
 	Name = 'Blacklist',
 	Tooltip = 'Name of module to hide.',
-	Icon = getcustomasset('levi_shakingrass/assets/new/blockedicon.png'),
-	Tab = getcustomasset('levi_shakingrass/assets/new/blockedtab.png'),
+	Icon = getcustomasset('Clae/assets/new/blockedicon.png'),
+	Tab = getcustomasset('Clae/assets/new/blockedtab.png'),
 	TabSize = UDim2.fromOffset(21, 16),
 	Color = Color3.fromRGB(250, 50, 56),
 	Function = function()
@@ -6760,7 +6355,7 @@ textguicolorcustom = textgui:CreateColorSlider({
 ]]
 
 local VapeLabels = {}
-local VapeLogo = Instance.new('TextLabel')
+local VapeLogo = Instance.new('ImageLabel')
 VapeLogo.Name = 'Logo'
 VapeLogo.Size = UDim2.fromOffset(80, 21)
 VapeLogo.Position = UDim2.new(1, -142, 0, 3)
@@ -6768,24 +6363,13 @@ VapeLogo.BackgroundTransparency = 1
 VapeLogo.BorderSizePixel = 0
 VapeLogo.Visible = false
 VapeLogo.BackgroundColor3 = Color3.new()
-VapeLogo.Text = 'LEVI'
-VapeLogo.TextColor3 = Color3.fromRGB(100, 180, 255)
-VapeLogo.TextSize = 14
-VapeLogo.FontFace = Font.fromEnum(Enum.Font.GothamBold)
-VapeLogo.TextXAlignment = Enum.TextXAlignment.Left
+VapeLogo.Image = getcustomasset('Clae/assets/new/textvape.png')
 VapeLogo.Parent = textgui.Children
-local VapeLogoGrad = Instance.new('UIGradient')
-VapeLogoGrad.Color = ColorSequence.new({
-	ColorSequenceKeypoint.new(0, Color3.fromRGB(80, 160, 255)),
-	ColorSequenceKeypoint.new(1, Color3.fromRGB(160, 80, 255))
-})
-VapeLogoGrad.Rotation = 45
-VapeLogoGrad.Parent = VapeLogo
 
 local lastside = textgui.Children.AbsolutePosition.X > (gui.AbsoluteSize.X / 2)
 mainapi:Clean(textgui.Children:GetPropertyChangedSignal('AbsolutePosition'):Connect(function()
 	if mainapi.ThreadFix then
-		pcall(_setIdentity, 8)
+		setthreadidentity(8)
 	end
 	local newside = textgui.Children.AbsolutePosition.X > (gui.AbsoluteSize.X / 2)
 	if lastside ~= newside then
@@ -6794,20 +6378,30 @@ mainapi:Clean(textgui.Children:GetPropertyChangedSignal('AbsolutePosition'):Conn
 	end
 end))
 
-local VapeLogoV4 = Instance.new('TextLabel')
+local VapeLogoV4 = Instance.new('ImageLabel')
 VapeLogoV4.Name = 'Logo2'
-VapeLogoV4.Size = UDim2.fromOffset(0, 0)
+VapeLogoV4.Size = UDim2.fromOffset(33, 18)
+VapeLogoV4.Position = UDim2.new(1, 1, 0, 1)
+VapeLogoV4.BackgroundColor3 = Color3.new()
 VapeLogoV4.BackgroundTransparency = 1
-VapeLogoV4.Text = ''
+VapeLogoV4.BorderSizePixel = 0
+VapeLogoV4.Image = getcustomasset('Clae/assets/new/textv4.png')
 VapeLogoV4.Parent = VapeLogo
+local VapeLogoShadow = VapeLogo:Clone()
+VapeLogoShadow.Position = UDim2.fromOffset(1, 1)
+VapeLogoShadow.ZIndex = 0
+VapeLogoShadow.Visible = true
+VapeLogoShadow.ImageColor3 = Color3.new()
+VapeLogoShadow.ImageTransparency = 0.65
+VapeLogoShadow.Parent = VapeLogo
+VapeLogoShadow.Logo2.ZIndex = 0
+VapeLogoShadow.Logo2.ImageColor3 = Color3.new()
+VapeLogoShadow.Logo2.ImageTransparency = 0.65
 local VapeLogoGradient = Instance.new('UIGradient')
-VapeLogoGradient.Rotation = 45
-VapeLogoGradient.Color = ColorSequence.new({
-	ColorSequenceKeypoint.new(0, Color3.fromRGB(80, 160, 255)),
-	ColorSequenceKeypoint.new(1, Color3.fromRGB(160, 80, 255))
-})
+VapeLogoGradient.Rotation = 90
 VapeLogoGradient.Parent = VapeLogo
 local VapeLogoGradient2 = Instance.new('UIGradient')
+VapeLogoGradient2.Rotation = 90
 VapeLogoGradient2.Parent = VapeLogoV4
 local VapeLabelCustom = Instance.new('TextLabel')
 VapeLabelCustom.Position = UDim2.fromOffset(5, 2)
@@ -6861,7 +6455,7 @@ local targetinfoobj
 local targetinfobcolor
 targetinfoobj = mainapi:CreateOverlay({
 	Name = 'Target Info',
-	Icon = getcustomasset('levi_shakingrass/assets/new/targetinfoicon.png'),
+	Icon = getcustomasset('Clae/assets/new/targetinfoicon.png'),
 	Size = UDim2.fromOffset(14, 14),
 	Position = UDim2.fromOffset(12, 14),
 	CategorySize = 240,
@@ -7175,7 +6769,7 @@ function mainapi:UpdateTextGUI(afterload)
 				holdertext.Position = UDim2.fromOffset(right and 3 or 6, 2)
 				holdertext.BackgroundTransparency = 1
 				holdertext.BorderSizePixel = 0
-				holdertext.Text = ({i:gsub(' ', '')})[1]..(v.ExtraText and " <font color='#A8A8A8'>"..v.ExtraText()..'</font>' or '')
+				holdertext.Text = i..(v.ExtraText and " <font color='#A8A8A8'>"..v.ExtraText()..'</font>' or '')
 				holdertext.TextSize = 15
 				holdertext.FontFace = textguifont.Value
 				holdertext.RichText = true
@@ -7321,12 +6915,6 @@ function mainapi:UpdateGUI(hue, sat, val, default)
 				option:Color(hue, sat, val, rainbow)
 			end
 		end
-
-		for _, v in button.Tags do
-			v.BackgroundColor3 = rainbow and Color3.fromHSV(mainapi:Color((hue - (button.Index * 0.025)) % 1)) or button.Enabled and Color3.new(1, 1, 1) or Color3.fromHSV(hue, sat, val)
-			v.BackgroundTransparency = (rainbow or not button.Enabled) and 0 or 0.85
-			v:FindFirstChild('Text').TextColor3 = mainapi.GUIColor.Rainbow and Color3.new(0.19, 0.19, 0.19) or mainapi:TextColor(hue, sat, val)
-		end
 	end
 
 	for i, v in mainapi.Overlays.Toggles do
@@ -7366,23 +6954,14 @@ mainapi:Clean(notifications.ChildRemoved:Connect(function()
 	end
 end))
 
-local whitelist = {Enum.UserInputType.MouseButton2, Enum.UserInputType.MouseButton3}
-local function convert(input)
-	warn(tostring(input))
-	return {KeyCode = {Name = input == Enum.UserInputType.MouseButton2 and 'MB2' or input == Enum.UserInputType.MouseButton1 and 'MB1' or 'MB3'}}
-end
-local function keybindStart(inputObj)
-	if not inputService:GetFocusedTextBox() and (inputObj.KeyCode ~= Enum.KeyCode.Unknown or table.find(whitelist, inputObj.UserInputType)) then
-		if table.find(whitelist, inputObj.UserInputType) then
-			inputObj = convert(inputObj.UserInputType)
-		end
-		
+mainapi:Clean(inputService.InputBegan:Connect(function(inputObj)
+	if not inputService:GetFocusedTextBox() and inputObj.KeyCode ~= Enum.KeyCode.Unknown then
 		table.insert(mainapi.HeldKeybinds, inputObj.KeyCode.Name)
 		if mainapi.Binding then return end
 
 		if checkKeybinds(mainapi.HeldKeybinds, mainapi.Keybind, inputObj.KeyCode.Name) then
 			if mainapi.ThreadFix then
-				pcall(_setIdentity, 8)
+				setthreadidentity(8)
 			end
 			for _, v in mainapi.Windows do
 				v.Visible = false
@@ -7414,12 +6993,10 @@ local function keybindStart(inputObj)
 			end
 		end
 	end
-end
-local function keybindEnd(inputObj)
-	if not inputService:GetFocusedTextBox() and (inputObj.KeyCode ~= Enum.KeyCode.Unknown or table.find(whitelist, inputObj.UserInputType)) then
-		if table.find(whitelist, inputObj.UserInputType) then
-			inputObj = convert(inputObj.UserInputType)
-		end
+end))
+
+mainapi:Clean(inputService.InputEnded:Connect(function(inputObj)
+	if not inputService:GetFocusedTextBox() and inputObj.KeyCode ~= Enum.KeyCode.Unknown then
 		if mainapi.Binding then
 			if not mainapi.MultiKeybind.Enabled then
 				mainapi.HeldKeybinds = {inputObj.KeyCode.Name}
@@ -7432,18 +7009,6 @@ local function keybindEnd(inputObj)
 	local ind = table.find(mainapi.HeldKeybinds, inputObj.KeyCode.Name)
 	if ind then
 		table.remove(mainapi.HeldKeybinds, ind)
-	end
-end
-mainapi:Clean(inputService.InputBegan:Connect(keybindStart))
-
-mainapi:Clean(inputService.InputEnded:Connect(function(inputObj)
-	if table.find(whitelist, inputObj.UserInputType) then
-		inputObj = convert(inputObj.UserInputType)
-	end
-	if mainapi.ToggleMode.Value == "Held" and not table.find(mainapi.Keybind, ({tostring(inputObj.KeyCode):gsub("Enum.KeyCode.", "")})[1]) then
-		keybindStart(inputObj)
-	else
-		keybindEnd(inputObj)
 	end
 end))
 
