@@ -1,18 +1,43 @@
-local function _isfile(f) local ok, r = pcall(readfile, f); return ok and r ~= nil and r ~= '' end
-local commit = _isfile('levi_shakingrass/profiles/commit.txt') and readfile('levi_shakingrass/profiles/commit.txt') or 'main'
-local target = 'levi_shakingrass/games/6872274481.lua'
--- Mirror downloadFile watermark logic: if cached file has the watermark, delete and re-download
--- This ensures stale cached copies are always replaced when the GitHub source is updated
-if _isfile(target) and readfile(target):find('--This watermark') then
-	pcall(delfile, target)
-end
-if not _isfile(target) then
-	local ok, src = pcall(game.HttpGet, game, 'https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/'..commit..'/games/6872274481.lua', true)
-	if ok and src and src ~= '404: Not Found' and #src > 100 then
-		writefile(target, '--This watermark is used to delete the file if its cached, remove it to make the file persist after vape updates.\n'..src)
+local vape = shared.vape
+local loadstring = function(...)
+	local res, err = loadstring(...)
+	if err and vape then 
+		vape:CreateNotification('Vape', 'Failed to load : '..err, 30, 'alert') 
 	end
+	return res
 end
-if _isfile(target) then
-	local fn, err = loadstring(readfile(target), '6872274481')
-	if fn then fn() else error('6872274481 parse error: '..tostring(err)) end
+local isfile = isfile or function(file)
+	local suc, res = pcall(function() 
+		return readfile(file) 
+	end)
+	return suc and res ~= nil and res ~= ''
+end
+local function downloadFile(path, func)
+	if not isfile(path) then
+		local suc, res = pcall(function() 
+			return game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'..readfile('Clae/profiles/commit.txt')..'/'..select(1, path:gsub('Clae/', '')), true) 
+		end)
+		if not suc or res == '404: Not Found' then 
+			error(res) 
+		end
+		if path:find('.lua') then 
+			res = '--This watermark is used to delete the file if its cached, remove it to make the file persist after vape updates.\n'..res 
+		end
+		writefile(path, res)
+	end
+	return (func or readfile)(path)
+end
+
+vape.Place = 6872274481
+if isfile('Clae/games/'..vape.Place..'.lua') then
+	loadstring(readfile('Clae/games/'..vape.Place..'.lua'), 'bedwars')()
+else
+	if not shared.VapeDeveloper then
+		local suc, res = pcall(function() 
+			return game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'..readfile('Clae/profiles/commit.txt')..'/games/'..vape.Place..'.lua', true) 
+		end)
+		if suc and res ~= '404: Not Found' then
+			loadstring(downloadFile('Clae/games/'..vape.Place..'.lua'), 'bedwars')()
+		end
+	end
 end
