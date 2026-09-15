@@ -16,7 +16,7 @@ end
 local function downloadFile(path, func)
 	if not isfile(path) then
 		local suc, res = pcall(function()
-			return game:HttpGet('https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/'.. readfile('levi_shakingrass/profiles/commit.txt').. '/'.. select(1, path:gsub('levi_shakingrass/', '')), true)
+			return game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'.. readfile('Clae/profiles/commit.txt').. '/'.. select(1, path:gsub('Clae/', '')), true)
 		end)
 		if not suc or res == '404: Not Found' then
 			error(res)
@@ -30,15 +30,15 @@ local function downloadFile(path, func)
 end
 
 vape.Place = 77790193039862
-if isfile('levi_shakingrass/games/' .. vape.Place .. '.lua') then
-	loadstring(readfile('levi_shakingrass/games/' .. vape.Place .. '.lua'), tostring(vape.Place))()
+if isfile('Clae/games/' .. vape.Place .. '.lua') then
+	loadstring(readfile('Clae/games/' .. vape.Place .. '.lua'), tostring(vape.Place))()
 else
 	if not shared.VapeDeveloper then
 		local suc, res = pcall(function()
-			return game:HttpGet('https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/'.. readfile('levi_shakingrass/profiles/commit.txt').. '/games/'.. vape.Place.. '.lua', true)
+			return game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'.. readfile('Clae/profiles/commit.txt').. '/games/'.. vape.Place.. '.lua', true)
 		end)
 		if suc and res ~= '404: Not Found' then
-			loadstring(downloadFile('levi_shakingrass/games/' .. vape.Place .. '.lua'), tostring(vape.Place))()
+			loadstring(downloadFile('Clae/games/' .. vape.Place .. '.lua'), tostring(vape.Place))()
 		end
 	end
 end
