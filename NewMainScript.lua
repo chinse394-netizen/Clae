@@ -9,6 +9,14 @@ local delfile = delfile or function(file)
 	writefile(file, '')
 end
 
+local CLAE_BRANCH = 'claude/migrate-miyonpuffnoodles-levi-76eojf'
+
+if not isfolder('Clae') then makefolder('Clae') end
+if not isfolder('Clae/profiles') then makefolder('Clae/profiles') end
+if not isfile('Clae/profiles/commit.txt') then
+	writefile('Clae/profiles/commit.txt', CLAE_BRANCH)
+end
+
 local function downloadFile(path, func)
 	if not isfile(path) then
 		local suc, res = pcall(function()
@@ -47,8 +55,8 @@ if not shared.VapeDeveloper then
 	end)
 	local commit = subbed:find('currentOid')
 	commit = commit and subbed:sub(commit + 13, commit + 52) or nil
-	commit = commit and #commit == 40 and commit or 'main'
-	if commit == 'main' or (isfile('Clae/profiles/commit.txt') and readfile('Clae/profiles/commit.txt') or '') ~= commit then
+	commit = commit and #commit == 40 and commit or CLAE_BRANCH
+	if (isfile('Clae/profiles/commit.txt') and readfile('Clae/profiles/commit.txt') or '') ~= commit then
 		wipeFolder('Clae')
 		wipeFolder('Clae/games')
 		wipeFolder('Clae/guis')
