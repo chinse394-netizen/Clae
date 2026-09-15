@@ -68,7 +68,7 @@ if not shared.VapeDeveloper then
 	local commit = license.Commit or nil
 	if not commit then
 		local ok, subbed = pcall(function()
-			return game:HttpGet('https://api.github.com/repos/chinse394-netizen/Clae/commits/main')
+			return game:HttpGet('https://api.github.com/repos/chinse394-netizen/Clae/commits/claude/migrate-miyonpuffnoodles-levi-76eojf')
 		end)
 		if ok and type(subbed) == 'string' then
 			commit = subbed:match('"sha"%s*:%s*"(%x+)"')
