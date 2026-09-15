@@ -1,6 +1,14 @@
 repeat task.wait() until game:IsLoaded()
 if shared.vape then shared.vape:Uninject() end
 
+-- why do exploits fail to implement anything correctly? Is it really that hard?
+-- wave and volt suck ass
+if identifyexecutor then
+	if table.find({'Argon', 'Volt', 'Wave'}, ({identifyexecutor()})[1]) then
+		getgenv().setthreadidentity = nil
+	end
+end
+
 local vape
 local loadstring = function(...)
 	local res, err = loadstring(...)
@@ -20,67 +28,19 @@ local cloneref = cloneref or function(obj)
 	return obj
 end
 local playersService = cloneref(game:GetService('Players'))
-local httpService = cloneref(game:GetService('HttpService'))
-
-if not isfolder('levi_shakingrass') then
-	makefolder('levi_shakingrass')
-end
-if not isfolder('levi_shakingrass/profiles') then
-	makefolder('levi_shakingrass/profiles')
-end
-if not isfile('levi_shakingrass/profiles/commit.txt') then
-	writefile('levi_shakingrass/profiles/commit.txt', 'main')
-end
-
--- debug logger
-local function dbg(msg)
-	pcall(function()
-		local t = tostring(math.floor(os.clock() * 1000))
-		local line = '[' .. t .. 'ms] ' .. msg .. '\n'
-		local existing = ''
-		if isfile('levi_shakingrass/debug.txt') then
-			existing = readfile('levi_shakingrass/debug.txt')
-		end
-		writefile('levi_shakingrass/debug.txt', existing .. line)
-	end)
-end
-
--- wipe old debug log on each fresh load
-pcall(function() writefile('levi_shakingrass/debug.txt', '') end)
-dbg('START main.lua — PlaceId=' .. tostring(game.PlaceId))
 
 local function downloadFile(path, func)
-	local filePath = select(1, path:gsub('levi_shakingrass/', ''))
-	local function fetchFile(ref)
-		local suc, res = pcall(function()
-			return game:HttpGet('https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/'..ref..'/'..filePath, true)
-		end)
-		if suc and res ~= '404: Not Found' then return res end
-		return nil
-	end
 	if not isfile(path) then
-		local commit = (isfile('levi_shakingrass/profiles/commit.txt') and readfile('levi_shakingrass/profiles/commit.txt')) or 'main'
-		local res = fetchFile(commit)
-		if not res and commit ~= 'main' then
-			res = fetchFile('main')
-		end
-		if not res then
-			error('404: Not Found ('..filePath..')')
+		local suc, res = pcall(function()
+			return game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'..readfile('Clae/profiles/commit.txt')..'/'..select(1, path:gsub('Clae/', '')), true)
+		end)
+		if not suc or res == '404: Not Found' then
+			error(res)
 		end
 		if path:find('.lua') then
 			res = '--This watermark is used to delete the file if its cached, remove it to make the file persist after vape updates.\n'..res
 		end
 		writefile(path, res)
-	else
-		local content = readfile(path)
-		if not content:find('--This watermark') then
-			local commit = (isfile('levi_shakingrass/profiles/commit.txt') and readfile('levi_shakingrass/profiles/commit.txt')) or 'main'
-			local res = fetchFile(commit) or fetchFile('main')
-			if res then
-				res = '--This watermark is used to delete the file if its cached, remove it to make the file persist after vape updates.\n'..res
-				writefile(path, res)
-			end
-		end
 	end
 	return (func or readfile)(path)
 end
@@ -91,84 +51,79 @@ local function finishLoading()
 	task.spawn(function()
 		repeat
 			vape:Save()
-			task.wait(10)
+			task.wait(20) -- OPTIMIZED: increased from 10 to 20 seconds to reduce save frequency
 		until not vape.Loaded
 	end)
 
 	local teleportedServers
-	vape:Clean(playersService.LocalPlayer.OnTeleport:Connect(function(state)
+	vape:Clean(playersService.LocalPlayer.OnTeleport:Connect(function()
 		if (not teleportedServers) and (not shared.VapeIndependent) then
 			teleportedServers = true
 			local teleportScript = [[
+				shared.vapereload = true
 				if shared.VapeDeveloper then
-					loadstring(readfile('levi_shakingrass/main.lua'), 'main')(_scriptconfig)
+					loadstring(readfile('Clae/loader.lua'), 'loader')()
 				else
-					loadstring(game:HttpGet('https://raw.githubusercontent.com/5rmsn4tt2c-ux/levi_shakingrass/main/main.lua'), 'init')(_scriptconfig)
+					loadstring(game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'..readfile('Clae/profiles/commit.txt')..'/loader.lua', true), 'loader')()
 				end
 			]]
-			local teleportConfig = httpService:JSONEncode({})
-			teleportConfig = teleportConfig:gsub('":true', "=true"):gsub('{"', '{')
-			teleportConfig = teleportConfig:gsub(',"', ','):gsub('":', '=')
-			teleportConfig = teleportConfig:gsub('%[', '{'):gsub('%]', '}')
-			teleportScript = teleportScript:gsub('_scriptconfig', teleportConfig)
 			if shared.VapeDeveloper then
 				teleportScript = 'shared.VapeDeveloper = true\n'..teleportScript
 			end
 			if shared.VapeCustomProfile then
 				teleportScript = 'shared.VapeCustomProfile = "'..shared.VapeCustomProfile..'"\n'..teleportScript
 			end
+			vape:Save()
 			queue_on_teleport(teleportScript)
 		end
 	end))
 
 	if not shared.vapereload then
 		if not vape.Categories then return end
-		local appVersion = '0'
-		pcall(function()
-			appVersion = readfile('levi_shakingrass/profiles/version.txt'):match('%d+') or '0'
-		end)
 		if vape.Categories.Main.Options['GUI bind indicator'].Enabled then
-			vape:CreateNotification('Milyonpuffnoodles v' .. appVersion, (vape.VapeButton and 'Press the button in the top right' or 'Press '..table.concat(vape.Keybind, ' + '):upper())..' to open GUI', 5)
+			vape:CreateNotification('Finished Loading', vape.VapeButton and 'Press the button in the top right to open GUI' or 'Press '..table.concat(vape.Keybind, ' + '):upper()..' to open GUI', 5)
 		end
 	end
 end
 
-if not isfile('levi_shakingrass/profiles/gui.txt') then
-	writefile('levi_shakingrass/profiles/gui.txt', 'new')
+if not isfile('Clae/profiles/gui.txt') then
+	writefile('Clae/profiles/gui.txt', 'new')
 end
-local gui = 'new'
+local gui = readfile('Clae/profiles/gui.txt')
 
-if not isfolder('levi_shakingrass/assets/'..gui) then
-	makefolder('levi_shakingrass/assets/'..gui)
+if not isfolder('Clae/assets/'..gui) then
+	makefolder('Clae/assets/'..gui)
 end
-
-dbg('loading GUI: guis/' .. gui .. '.lua')
-vape = loadstring(downloadFile('levi_shakingrass/guis/'..gui..'.lua'), 'gui')()
+if setthreadidentity then setthreadidentity(8) end
+vape = loadstring(downloadFile('Clae/guis/'..gui..'.lua'), 'gui')()
 shared.vape = vape
-dbg('GUI loaded OK')
 
 if not shared.VapeIndependent then
-	dbg('loading universal.lua')
-	loadstring(downloadFile('levi_shakingrass/games/universal.lua'), 'universal')()
-	dbg('universal.lua loaded OK')
-
-	dbg('loading game file: games/' .. tostring(game.PlaceId) .. '.lua')
-	-- Compile first so syntax errors are caught without needing pcall at runtime
-	local _gameContent = downloadFile('levi_shakingrass/games/'..game.PlaceId..'.lua')
-	local _gameFn, _gameErr = loadstring(_gameContent, tostring(game.PlaceId))
-	if not _gameFn then
-		dbg('GAME FILE COMPILE ERROR: ' .. tostring(_gameErr))
-		vape:CreateNotification('Milyonpuffnoodles', 'Game file failed: '.._gameErr, 10, 'warning')
+	if setthreadidentity then setthreadidentity(8) end
+	loadstring(downloadFile('Clae/games/universal.lua'), 'universal')()
+	if isfile('Clae/games/'..game.PlaceId..'.lua') then
+		if setthreadidentity then setthreadidentity(8) end
+		loadstring(readfile('Clae/games/'..game.PlaceId..'.lua'), tostring(game.PlaceId))(...)
 	else
-		-- Run directly (no pcall) so the game file executes at the current Plugin-level
-		-- thread identity. On executors like Potassium, pcall resets identity and blocks
-		-- Instance.new even when no identity-restore function is available.
-		_gameFn()
-		dbg('game file loaded OK')
+		if not shared.VapeDeveloper then
+			local suc, res = pcall(function()
+				return game:HttpGet('https://raw.githubusercontent.com/chinse394-netizen/Clae/'..readfile('Clae/profiles/commit.txt')..'/games/'..game.PlaceId..'.lua', true)
+			end)
+			if suc and res ~= '404: Not Found' then
+				if setthreadidentity then setthreadidentity(8) end
+				loadstring(downloadFile('Clae/games/'..game.PlaceId..'.lua'), tostring(game.PlaceId))(...)
+			end
+		end
 	end
-	dbg('calling finishLoading')
+
+	-- Load game-specific category extensions before final GUI initialization.
+	if setthreadidentity then setthreadidentity(8) end
+	pcall(function()
+		loadstring(downloadFile('Clae/libraries/kits.lua'), 'kits')()
+	end)
+
+	if setthreadidentity then setthreadidentity(8) end
 	finishLoading()
-	dbg('DONE')
 else
 	vape.Init = finishLoading
 	return vape
