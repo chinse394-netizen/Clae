@@ -1,1 +1,8 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/chinse394-netizen/Clae/claude/migrate-miyonpuffnoodles-levi-76eojf/NewMainScript.lua", true))()
+local url = "https://raw.githubusercontent.com/chinse394-netizen/Clae/claude/migrate-miyonpuffnoodles-levi-76eojf/NewMainScript.lua"
+local source = game:HttpGet(url, true)
+assert(type(source) == "string" and #source > 0, "Clae loader returned empty HTTP content")
+local compiler = loadstring or load
+assert(type(compiler) == "function", "This executor does not provide loadstring/load")
+local fn, err = compiler(source, "Clae/NewMainScript.lua")
+assert(type(fn) == "function", "Clae compile error: " .. tostring(err))
+return fn()
